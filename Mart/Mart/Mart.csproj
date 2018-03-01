@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA8B3798-9573-423F-AF4D-5FB4B6829A4A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Mart</RootNamespace>
+    <AssemblyName>Mart</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>E:\A. Code\A. C#\SQL Server\FirstTime\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlClasses\CirclePictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlClasses\Controller.cs" />
+    <Compile Include="ControlClasses\Exporter.cs" />
+    <Compile Include="ControlClasses\Input.cs" />
+    <Compile Include="DataModel\DailySoldModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailySoldModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\DailySoldModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailySoldModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\DailySoldModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailySoldModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeeModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeeModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetDailySold_Result.cs">
+      <DependentUpon>DailySoldModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetSoldByYear_Result.cs">
+      <DependentUpon>SoldYearModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetSoldDayDetails_Result.cs">
+      <DependentUpon>SoldProductNameModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetSoldMonthly_Result.cs">
+      <DependentUpon>SoldMonthlyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PrintEmployee_Result.cs">
+      <DependentUpon>EmployeeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SoldMonthlyModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoldMonthlyModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SoldMonthlyModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoldMonthlyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SoldMonthlyModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoldMonthlyModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SoldProductNameModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoldProductNameModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SoldProductNameModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoldProductNameModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SoldProductNameModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoldProductNameModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SoldYearModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoldYearModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SoldYearModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoldYearModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SoldYearModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoldYearModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmInsertEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmInsertEmployee.Designer.cs">
+      <DependentUpon>frmInsertEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRole.Designer.cs">
+      <DependentUpon>frmRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstanceClasses\Employee.cs" />
+    <Compile Include="InstanceClasses\Role.cs" />
+    <Compile Include="Intefaces\IFunctionModel.cs" />
+    <Compile Include="Intefaces\IMessageType.cs" />
+    <Compile Include="InstanceClasses\Product.cs" />
+    <Compile Include="LocalConnection\Connection.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\sell.cs" />
+    <Compile Include="UserControls\UBin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Ubin.Designer.cs">
+      <DependentUpon>UBin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UBinEmployee.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UBinEmployee.Designer.cs">
+      <DependentUpon>UBinEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UEmployee.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UEmployee.Designer.cs">
+      <DependentUpon>UEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UImportStock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UImportStock.Designer.cs">
+      <DependentUpon>UImportStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UProduct.Designer.cs">
+      <DependentUpon>UProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UReport.Designer.cs">
+      <DependentUpon>UReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\USetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\USetting.Designer.cs">
+      <DependentUpon>USetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\USold.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\USold.Designer.cs">
+      <DependentUpon>USold.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\USubSold.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\USubSold.Designer.cs">
+      <DependentUpon>USubSold.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\frmInsertEmployee.resx">
+      <DependentUpon>frmInsertEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRole.resx">
+      <DependentUpon>frmRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UBin.resx">
+      <DependentUpon>UBin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UBinEmployee.resx">
+      <DependentUpon>UBinEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UEmployee.resx">
+      <DependentUpon>UEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UImportStock.resx">
+      <DependentUpon>UImportStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UProduct.resx">
+      <DependentUpon>UProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UReport.resx">
+      <DependentUpon>UReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\USetting.resx">
+      <DependentUpon>USetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\USold.resx">
+      <DependentUpon>USold.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\USubSold.resx">
+      <DependentUpon>USubSold.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <EntityDeploy Include="DataModel\EmployeeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EmployeeModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="DataModel\DailySoldModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DailySoldModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataModel\DailySoldModel.edmx.diagram">
+      <DependentUpon>DailySoldModel.edmx</DependentUpon>
+    </None>
+    <None Include="DataModel\EmployeeModel.edmx.diagram">
+      <DependentUpon>EmployeeModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="DataModel\SoldYearModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SoldYearModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="DataModel\SoldMonthlyModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SoldMonthlyModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataModel\SoldMonthlyModel.edmx.diagram">
+      <DependentUpon>SoldMonthlyModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="DataModel\SoldProductNameModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SoldProductNameModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataModel\SoldProductNameModel.edmx.diagram">
+      <DependentUpon>SoldProductNameModel.edmx</DependentUpon>
+    </None>
+    <None Include="DataModel\SoldYearModel.edmx.diagram">
+      <DependentUpon>SoldYearModel.edmx</DependentUpon>
+    </None>
+    <None Include="Mart.DataModel.PrintEmployee_Result.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataModel\DailySoldModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DailySoldModel.edmx</DependentUpon>
+      <LastGenOutput>DailySoldModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\DailySoldModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DailySoldModel.edmx</DependentUpon>
+      <LastGenOutput>DailySoldModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\EmployeeModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EmployeeModel.edmx</DependentUpon>
+      <LastGenOutput>EmployeeModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\EmployeeModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EmployeeModel.edmx</DependentUpon>
+      <LastGenOutput>EmployeeModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\SoldMonthlyModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SoldMonthlyModel.edmx</DependentUpon>
+      <LastGenOutput>SoldMonthlyModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\SoldMonthlyModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SoldMonthlyModel.edmx</DependentUpon>
+      <LastGenOutput>SoldMonthlyModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\SoldProductNameModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SoldProductNameModel.edmx</DependentUpon>
+      <LastGenOutput>SoldProductNameModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\SoldProductNameModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SoldProductNameModel.edmx</DependentUpon>
+      <LastGenOutput>SoldProductNameModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\SoldYearModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SoldYearModel.edmx</DependentUpon>
+      <LastGenOutput>SoldYearModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\SoldYearModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SoldYearModel.edmx</DependentUpon>
+      <LastGenOutput>SoldYearModel.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\Restart_48.png" />
+    <None Include="Resources\GoBack_48.png" />
+    <None Include="Resources\Back_48.png" />
+    <None Include="Resources\login.jpg" />
+    <None Include="Resources\show9.png" />
+    <None Include="Resources\Cancel_48.png" />
+    <None Include="Resources\Resize.png" />
+    <None Include="Resources\Maximize_128.png" />
+    <None Include="Resources\Home.png" />
+    <None Include="Resources\no.jpg" />
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\Minimizing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FormPrintDocuments\" />
+    <Folder Include="RDLCReport\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
