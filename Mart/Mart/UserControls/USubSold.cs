@@ -68,7 +68,7 @@ namespace Mart
             /* This section is to call any function to Previous Step */
             if (selectedYear && !selectedMonth && !selectedDay)
             {
-                /*User now already selected A Year*/
+                /*User now already selected a Year*/
                 DoPictureBoxClicked(pbRefresh, e);  /* Refresh => it means get to the first LOAD */
                 selectedYear = false;
             }
