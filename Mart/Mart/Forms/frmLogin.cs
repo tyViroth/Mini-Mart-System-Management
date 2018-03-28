@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Mart.Intefaces;
 using Mart.InstanceClasses;
+using Mart.ControlClasses;
 
 namespace Mart.Forms
 {
@@ -19,8 +20,8 @@ namespace Mart.Forms
         private readonly int MINIMUM_HEIGHT = 700;
         private readonly int WIDTH_NO_TASKBAR = Screen.PrimaryScreen.WorkingArea.Width;
         private readonly int HEIGHT_NO_TASKBAR = Screen.PrimaryScreen.WorkingArea.Height;
-        private readonly string userHolder = " username";
-        private readonly string passHolder = " password";
+        private readonly string userHolder = "Enter Username";
+        private readonly string passHolder = "Enter Password";
 
         private Employee emp;
 
@@ -67,7 +68,7 @@ namespace Mart.Forms
             pContainer.Click += pContainer_Click;
             this.Shown += frmLogin_Shown;
 
-            Employee.Created += Employee_Created;
+            Employee.Created += Employee_Created;            
         }
 
         void frmLogin_Shown(object sender, EventArgs e)
@@ -126,12 +127,16 @@ namespace Mart.Forms
                 con.Open();
                 cmd = new SqlCommand("CompareLogin",con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@user", txtUsername.Text.Trim());
-                cmd.Parameters.AddWithValue("@pass", txtPassword.Text.Trim());
+                cmd.Parameters.AddWithValue("@user", txtUsername.Text.Trim());               
                 dr = cmd.ExecuteReader();
-                while(dr.Read()){                  
-                    Employee.CreatedInstance((int)dr["empID"], (string)dr["firstName"], (string)dr["lastName"], (string)dr["gender"], (DateTime)dr["birthDate"], (string)dr["username"], (string)dr["password"], new Role((int)dr["roleID"], (string)dr["roleName"]), (bool)dr["status"], (byte[])dr["photo"]);                  
-                }                 
+                while(dr.Read()){          
+                    /* Compare Hash Code to Log In*/
+                    if (ConvertHashCode.CompareDbHashWithInputHash((string)dr["password"], txtPassword.Text.Trim()))
+                    {
+                        Employee.CreatedInstance((int)dr["empID"], (string)dr["firstName"], (string)dr["lastName"], (string)dr["gender"], (DateTime)dr["birthDate"], (string)dr["username"], (string)dr["password"], new Role((int)dr["roleID"], (string)dr["roleName"]), (bool)dr["status"], (byte[])dr["photo"]);
+                        break;
+                    }                    
+                } 
             }
             catch (SqlException ex)
             {
@@ -140,7 +145,7 @@ namespace Mart.Forms
             finally
             {
                 cmd.Dispose();
-                con.Close();
+                con.Close();                
             }
 
             if (emp == null)

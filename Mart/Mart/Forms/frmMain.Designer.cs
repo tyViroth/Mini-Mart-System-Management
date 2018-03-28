@@ -33,13 +33,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.mainPanel = new System.Windows.Forms.Panel();
-            this.pBanner = new System.Windows.Forms.Panel();
-            this.flpAccountUser = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblRole = new System.Windows.Forms.Label();
-            this.lblUsername = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.btnReport = new System.Windows.Forms.Button();
             this.btnUser = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
@@ -48,11 +41,18 @@
             this.btnSold = new System.Windows.Forms.Button();
             this.btnBin = new System.Windows.Forms.Button();
             this.btnProduct = new System.Windows.Forms.Button();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.pBanner = new System.Windows.Forms.Panel();
+            this.flpAccountUser = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblRole = new System.Windows.Forms.Label();
+            this.lblUsername = new System.Windows.Forms.Label();
             this.pbAccountImage = new Mart.ControlClasses.CirclePictureBox();
             this.pbResize = new System.Windows.Forms.PictureBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.pbMinimize = new System.Windows.Forms.PictureBox();
             this.pbExit = new System.Windows.Forms.PictureBox();
+            this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -129,86 +129,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(70, 547);
             this.tableLayoutPanel3.TabIndex = 16;
-            // 
-            // mainPanel
-            // 
-            this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.mainPanel.Location = new System.Drawing.Point(74, 0);
-            this.mainPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(850, 551);
-            this.mainPanel.TabIndex = 14;
-            // 
-            // pBanner
-            // 
-            this.pBanner.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(85)))), ((int)(((byte)(130)))));
-            this.pBanner.Controls.Add(this.flpAccountUser);
-            this.pBanner.Controls.Add(this.pbResize);
-            this.pBanner.Controls.Add(this.pbLogo);
-            this.pBanner.Controls.Add(this.label2);
-            this.pBanner.Controls.Add(this.pbMinimize);
-            this.pBanner.Controls.Add(this.pbExit);
-            this.pBanner.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBanner.Location = new System.Drawing.Point(0, 0);
-            this.pBanner.Margin = new System.Windows.Forms.Padding(0);
-            this.pBanner.Name = "pBanner";
-            this.pBanner.Size = new System.Drawing.Size(924, 35);
-            this.pBanner.TabIndex = 17;
-            // 
-            // flpAccountUser
-            // 
-            this.flpAccountUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flpAccountUser.AutoSize = true;
-            this.flpAccountUser.Controls.Add(this.lblRole);
-            this.flpAccountUser.Controls.Add(this.lblUsername);
-            this.flpAccountUser.Controls.Add(this.pbAccountImage);
-            this.flpAccountUser.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpAccountUser.Location = new System.Drawing.Point(640, 3);
-            this.flpAccountUser.Name = "flpAccountUser";
-            this.flpAccountUser.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.flpAccountUser.Size = new System.Drawing.Size(175, 28);
-            this.flpAccountUser.TabIndex = 9;
-            this.flpAccountUser.WrapContents = false;
-            // 
-            // lblRole
-            // 
-            this.lblRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblRole.AutoSize = true;
-            this.lblRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole.ForeColor = System.Drawing.Color.White;
-            this.lblRole.Location = new System.Drawing.Point(124, 6);
-            this.lblRole.Margin = new System.Windows.Forms.Padding(5, 6, 5, 0);
-            this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(46, 16);
-            this.lblRole.TabIndex = 8;
-            this.lblRole.Text = "Admin";
-            // 
-            // lblUsername
-            // 
-            this.lblUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.ForeColor = System.Drawing.Color.White;
-            this.lblUsername.Location = new System.Drawing.Point(33, 6);
-            this.lblUsername.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(83, 16);
-            this.lblUsername.TabIndex = 7;
-            this.lblUsername.Text = "Jams Bonds";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(33, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(186, 16);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Mart Management System";
             // 
             // btnReport
             // 
@@ -458,15 +378,86 @@
             this.btnProduct.UseMnemonic = false;
             this.btnProduct.UseVisualStyleBackColor = false;
             // 
+            // mainPanel
+            // 
+            this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.mainPanel.Location = new System.Drawing.Point(74, 0);
+            this.mainPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(850, 551);
+            this.mainPanel.TabIndex = 14;
+            // 
+            // pBanner
+            // 
+            this.pBanner.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(85)))), ((int)(((byte)(130)))));
+            this.pBanner.Controls.Add(this.flpAccountUser);
+            this.pBanner.Controls.Add(this.pbResize);
+            this.pBanner.Controls.Add(this.pbLogo);
+            this.pBanner.Controls.Add(this.label2);
+            this.pBanner.Controls.Add(this.pbMinimize);
+            this.pBanner.Controls.Add(this.pbExit);
+            this.pBanner.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBanner.Location = new System.Drawing.Point(0, 0);
+            this.pBanner.Margin = new System.Windows.Forms.Padding(0);
+            this.pBanner.Name = "pBanner";
+            this.pBanner.Size = new System.Drawing.Size(924, 35);
+            this.pBanner.TabIndex = 17;
+            // 
+            // flpAccountUser
+            // 
+            this.flpAccountUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpAccountUser.AutoSize = true;
+            this.flpAccountUser.Controls.Add(this.lblRole);
+            this.flpAccountUser.Controls.Add(this.lblUsername);
+            this.flpAccountUser.Controls.Add(this.pbAccountImage);
+            this.flpAccountUser.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpAccountUser.Location = new System.Drawing.Point(632, 1);
+            this.flpAccountUser.Margin = new System.Windows.Forms.Padding(0);
+            this.flpAccountUser.Name = "flpAccountUser";
+            this.flpAccountUser.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.flpAccountUser.Size = new System.Drawing.Size(189, 34);
+            this.flpAccountUser.TabIndex = 9;
+            this.flpAccountUser.WrapContents = false;
+            // 
+            // lblRole
+            // 
+            this.lblRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole.ForeColor = System.Drawing.Color.White;
+            this.lblRole.Location = new System.Drawing.Point(131, 8);
+            this.lblRole.Margin = new System.Windows.Forms.Padding(10, 8, 10, 0);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(48, 17);
+            this.lblRole.TabIndex = 8;
+            this.lblRole.Text = "Admin";
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.ForeColor = System.Drawing.Color.White;
+            this.lblUsername.Location = new System.Drawing.Point(38, 8);
+            this.lblUsername.Margin = new System.Windows.Forms.Padding(5, 8, 3, 0);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(80, 17);
+            this.lblUsername.TabIndex = 7;
+            this.lblUsername.Text = "Jams Bonds";
+            // 
             // pbAccountImage
             // 
             this.pbAccountImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbAccountImage.BackColor = System.Drawing.Color.DarkGray;
             this.pbAccountImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbAccountImage.Image = global::Mart.Properties.Resources.no;
-            this.pbAccountImage.Location = new System.Drawing.Point(3, 3);
+            this.pbAccountImage.Location = new System.Drawing.Point(1, 1);
+            this.pbAccountImage.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.pbAccountImage.Name = "pbAccountImage";
-            this.pbAccountImage.Size = new System.Drawing.Size(24, 22);
+            this.pbAccountImage.Size = new System.Drawing.Size(32, 32);
             this.pbAccountImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbAccountImage.TabIndex = 1;
             this.pbAccountImage.TabStop = false;
@@ -491,6 +482,17 @@
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLogo.TabIndex = 5;
             this.pbLogo.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(38, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 21);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Start-Up Mart";
             // 
             // pbMinimize
             // 

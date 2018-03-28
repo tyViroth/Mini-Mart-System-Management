@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>preview_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -65,22 +68,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ControlClasses\Controller.cs" />
+    <Compile Include="ControlClasses\ConvertHashCode.cs" />
     <Compile Include="ControlClasses\Exporter.cs" />
     <Compile Include="ControlClasses\Input.cs" />
-    <Compile Include="DataModel\DailySoldModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DailySoldModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\DailySoldModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DailySoldModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\DailySoldModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DailySoldModel.edmx</DependentUpon>
+    <Compile Include="ControlClasses\spinningCircles.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataModel\EmployeeModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -98,70 +90,67 @@
       <DependentUpon>EmployeeModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataModel\GetDailySold_Result.cs">
-      <DependentUpon>DailySoldModel.tt</DependentUpon>
+      <DependentUpon>SoldModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\GetSoldByYear_Result.cs">
-      <DependentUpon>SoldYearModel.tt</DependentUpon>
+    <Compile Include="DataModel\GetDayDetailsSold_Result.cs">
+      <DependentUpon>SoldModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\GetSoldDayDetails_Result.cs">
-      <DependentUpon>SoldProductNameModel.tt</DependentUpon>
+    <Compile Include="DataModel\GetMonthlySold_Result.cs">
+      <DependentUpon>SoldModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\GetSoldMonthly_Result.cs">
-      <DependentUpon>SoldMonthlyModel.tt</DependentUpon>
+    <Compile Include="DataModel\GetYearlySold_Result.cs">
+      <DependentUpon>SoldModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PrintEmployee_Result.cs">
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\SoldMonthlyModel.Context.cs">
+    <Compile Include="DataModel\ProductsModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SoldMonthlyModel.Context.tt</DependentUpon>
+      <DependentUpon>ProductsModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\SoldMonthlyModel.cs">
+    <Compile Include="DataModel\ProductsModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SoldMonthlyModel.tt</DependentUpon>
+      <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\SoldMonthlyModel.Designer.cs">
+    <Compile Include="DataModel\ProductsModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SoldMonthlyModel.edmx</DependentUpon>
+      <DependentUpon>ProductsModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\SoldProductNameModel.Context.cs">
+    <Compile Include="DataModel\SoldModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SoldProductNameModel.Context.tt</DependentUpon>
+      <DependentUpon>SoldModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\SoldProductNameModel.cs">
+    <Compile Include="DataModel\SoldModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SoldProductNameModel.tt</DependentUpon>
+      <DependentUpon>SoldModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\SoldProductNameModel.Designer.cs">
+    <Compile Include="DataModel\SoldModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SoldProductNameModel.edmx</DependentUpon>
+      <DependentUpon>SoldModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\SoldYearModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SoldYearModel.Context.tt</DependentUpon>
+    <Compile Include="Forms\frmCategory.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataModel\SoldYearModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SoldYearModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\SoldYearModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SoldYearModel.edmx</DependentUpon>
+    <Compile Include="Forms\frmCategory.designer.cs">
+      <DependentUpon>frmCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmInsertEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmInsertEmployee.Designer.cs">
       <DependentUpon>frmInsertEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLoading.Designer.cs">
+      <DependentUpon>frmLoading.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmLogin.cs">
       <SubType>Form</SubType>
@@ -175,14 +164,46 @@
     <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmPreviewPhoto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPreviewPhoto.Designer.cs">
+      <DependentUpon>frmPreviewPhoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmProfile.Designer.cs">
+      <DependentUpon>frmProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmRole.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmRole.Designer.cs">
       <DependentUpon>frmRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmLoadSoldDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLoadSoldDetail.Designer.cs">
+      <DependentUpon>frmLoadSoldDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmProductDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmProductDetails.designer.cs">
+      <DependentUpon>frmProductDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SoldInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SoldInfo.Designer.cs">
+      <DependentUpon>SoldInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="InstanceClasses\Employee.cs" />
     <Compile Include="InstanceClasses\Role.cs" />
+    <Compile Include="InstanceClasses\sold.cs" />
+    <Compile Include="InstanceClasses\Stock.cs" />
     <Compile Include="Intefaces\IFunctionModel.cs" />
     <Compile Include="Intefaces\IMessageType.cs" />
     <Compile Include="InstanceClasses\Product.cs" />
@@ -194,7 +215,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\sell.cs" />
     <Compile Include="UserControls\UBin.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -249,8 +269,14 @@
     <Compile Include="UserControls\USubSold.Designer.cs">
       <DependentUpon>USubSold.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\frmCategory.resx">
+      <DependentUpon>frmCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInsertEmployee.resx">
       <DependentUpon>frmInsertEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLoading.resx">
+      <DependentUpon>frmLoading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -258,8 +284,23 @@
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPreviewPhoto.resx">
+      <DependentUpon>frmPreviewPhoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmProfile.resx">
+      <DependentUpon>frmProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRole.resx">
       <DependentUpon>frmRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLoadSoldDetail.resx">
+      <DependentUpon>frmLoadSoldDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmProductDetails.resx">
+      <DependentUpon>frmProductDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SoldInfo.resx">
+      <DependentUpon>SoldInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -298,36 +339,22 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EmployeeModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <EntityDeploy Include="DataModel\DailySoldModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DailySoldModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DataModel\DailySoldModel.edmx.diagram">
-      <DependentUpon>DailySoldModel.edmx</DependentUpon>
-    </None>
     <None Include="DataModel\EmployeeModel.edmx.diagram">
       <DependentUpon>EmployeeModel.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="DataModel\SoldYearModel.edmx">
+    <EntityDeploy Include="DataModel\SoldModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SoldYearModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>SoldModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <EntityDeploy Include="DataModel\SoldMonthlyModel.edmx">
+    <EntityDeploy Include="DataModel\ProductsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SoldMonthlyModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProductsModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DataModel\SoldMonthlyModel.edmx.diagram">
-      <DependentUpon>SoldMonthlyModel.edmx</DependentUpon>
+    <None Include="DataModel\ProductsModel.edmx.diagram">
+      <DependentUpon>ProductsModel.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="DataModel\SoldProductNameModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SoldProductNameModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DataModel\SoldProductNameModel.edmx.diagram">
-      <DependentUpon>SoldProductNameModel.edmx</DependentUpon>
-    </None>
-    <None Include="DataModel\SoldYearModel.edmx.diagram">
-      <DependentUpon>SoldYearModel.edmx</DependentUpon>
+    <None Include="DataModel\SoldModel.edmx.diagram">
+      <DependentUpon>SoldModel.edmx</DependentUpon>
     </None>
     <None Include="Mart.DataModel.PrintEmployee_Result.datasource" />
     <None Include="Properties\Settings.settings">
@@ -341,16 +368,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataModel\DailySoldModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DailySoldModel.edmx</DependentUpon>
-      <LastGenOutput>DailySoldModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DataModel\DailySoldModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DailySoldModel.edmx</DependentUpon>
-      <LastGenOutput>DailySoldModel.cs</LastGenOutput>
-    </Content>
     <Content Include="DataModel\EmployeeModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EmployeeModel.edmx</DependentUpon>
@@ -361,36 +378,41 @@
       <DependentUpon>EmployeeModel.edmx</DependentUpon>
       <LastGenOutput>EmployeeModel.cs</LastGenOutput>
     </Content>
-    <Content Include="DataModel\SoldMonthlyModel.Context.tt">
+    <Content Include="DataModel\ProductsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SoldMonthlyModel.edmx</DependentUpon>
-      <LastGenOutput>SoldMonthlyModel.Context.cs</LastGenOutput>
+      <DependentUpon>ProductsModel.edmx</DependentUpon>
+      <LastGenOutput>ProductsModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataModel\SoldMonthlyModel.tt">
+    <Content Include="DataModel\ProductsModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SoldMonthlyModel.edmx</DependentUpon>
-      <LastGenOutput>SoldMonthlyModel.cs</LastGenOutput>
+      <DependentUpon>ProductsModel.edmx</DependentUpon>
+      <LastGenOutput>ProductsModel.cs</LastGenOutput>
     </Content>
-    <Content Include="DataModel\SoldProductNameModel.Context.tt">
+    <Content Include="DataModel\SoldModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SoldProductNameModel.edmx</DependentUpon>
-      <LastGenOutput>SoldProductNameModel.Context.cs</LastGenOutput>
+      <DependentUpon>SoldModel.edmx</DependentUpon>
+      <LastGenOutput>SoldModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataModel\SoldProductNameModel.tt">
+    <Content Include="DataModel\SoldModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SoldProductNameModel.edmx</DependentUpon>
-      <LastGenOutput>SoldProductNameModel.cs</LastGenOutput>
+      <DependentUpon>SoldModel.edmx</DependentUpon>
+      <LastGenOutput>SoldModel.cs</LastGenOutput>
     </Content>
-    <Content Include="DataModel\SoldYearModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SoldYearModel.edmx</DependentUpon>
-      <LastGenOutput>SoldYearModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DataModel\SoldYearModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SoldYearModel.edmx</DependentUpon>
-      <LastGenOutput>SoldYearModel.cs</LastGenOutput>
-    </Content>
+    <Content Include="preview_icon.ico" />
+    <Content Include="Resources\delete.png" />
+    <Content Include="Resources\delete_48.png" />
+    <Content Include="Resources\edit_48.png" />
+    <None Include="Resources\ic_search_black_36dp_1x.png" />
+    <None Include="Resources\ic_mode_edit_black_48dp_1x.png" />
+    <None Include="Resources\ic_delete_forever_black_48dp_1x.png" />
+    <Content Include="Resources\search_36.png" />
+    <None Include="Resources\collapse_48.png" />
+    <None Include="Resources\Search_48.png" />
+    <None Include="Resources\extend_481.png" />
+    <None Include="Resources\extend_48.png" />
+    <None Include="Resources\preview-icon.png" />
+    <None Include="Resources\lock_px.png" />
+    <None Include="Resources\Employee_48.png" />
     <None Include="Resources\Restart_48.png" />
     <None Include="Resources\GoBack_48.png" />
     <None Include="Resources\Back_48.png" />

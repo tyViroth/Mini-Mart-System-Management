@@ -53,7 +53,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 522);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(833, 522);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -64,7 +64,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(774, 30);
+            this.panel1.Size = new System.Drawing.Size(833, 30);
             this.panel1.TabIndex = 0;
             // 
             // rdSold
@@ -98,7 +98,7 @@
             this.pContainer.Location = new System.Drawing.Point(0, 30);
             this.pContainer.Margin = new System.Windows.Forms.Padding(0);
             this.pContainer.Name = "pContainer";
-            this.pContainer.Size = new System.Drawing.Size(774, 492);
+            this.pContainer.Size = new System.Drawing.Size(833, 492);
             this.pContainer.TabIndex = 1;
             // 
             // UReport
@@ -110,7 +110,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "UReport";
-            this.Size = new System.Drawing.Size(811, 548);
+            this.Size = new System.Drawing.Size(870, 548);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

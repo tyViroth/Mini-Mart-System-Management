@@ -92,6 +92,9 @@ namespace Mart
         private void RegisterControlEvent()
         {
             dgvEmployee.DataError += dgvEmployee_DataError;
+            dgvEmployee.SelectionChanged += dgvEmployee_SelectionChanged;                     
+            dgvEmployee.CellFormatting += dgvEmployee_CellFormatting;
+
             btnAdd.Click += DoClick;           
             btnUpdate.Click += DoClick;
             btnDelete.Click += DoClick;
@@ -111,7 +114,30 @@ namespace Mart
             /* Register Static Event of Class Employee */
             Employee.Loaded += Employee_Loaded;
             Employee.Created += Employee_Created;            
-            Employee.Updated += Employee_Updated;
+            //Employee.Updated += Employee_Updated;
+        }
+
+        void dgvEmployee_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 7)
+            {
+                DataGridViewCell cell = dgvEmployee.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                cell.ToolTipText = "Click to Preview";
+            }
+        }
+
+        void dgvEmployee_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvEmployee.Rows.Count == 0) return;
+            int rowIndex = dgvEmployee.CurrentRow.Index;
+            int colIndex = dgvEmployee.CurrentCell.ColumnIndex;
+            if (colIndex == 7)
+            {                
+                byte[] img = (byte[])dgvEmployee[colIndex, rowIndex].Value;
+                if (img == null) return;
+                frmPreviewPhoto preview = new frmPreviewPhoto(img);
+                preview.Show();
+            }            
         }
 
         private void AllowNumberOnly(object sender, KeyPressEventArgs e)
@@ -239,6 +265,7 @@ namespace Mart
        
         void Employee_Loaded(Employee emp)
         {
+            emp.Updated += Employee_Updated;
             employeeList.Add(emp);
             AddDataRowToDataGridView(emp);            
         }
@@ -247,6 +274,7 @@ namespace Mart
         {            
             if (Insert(emp))
             {
+                emp.Updated += Employee_Updated;
                 employeeList.Add(emp);
                 AddDataRowToDataGridView(emp);            
                 MessageSuccess("Inserted successfully", "Insert");
@@ -374,7 +402,7 @@ namespace Mart
                 cmd = new SqlCommand("GetActiveEmployees",con);
                 dr = cmd.ExecuteReader();
                 dgvEmployee.Rows.Clear();
-                employeeList.Clear(); 
+                employeeList.Clear();
                 while(dr.Read()){
                     if ((string)dr["gender"] == "Female") femaleNumber ++;
                     if ((string)dr["username"] != "") AccoutNumber ++;

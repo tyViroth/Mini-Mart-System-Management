@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Mart.UserControls;
 using Mart.InstanceClasses;
+using Mart.Forms;
 
 using System.IO;
 
@@ -24,13 +25,13 @@ namespace Mart
         readonly int HEIGHT_NO_TASKBAR = Screen.PrimaryScreen.WorkingArea.Height;
         private readonly Color ButtonBackGround = Color.FromArgb(255, 205, 65);        
 
-        private Employee emp;
+        private Employee empLogin;
 
         /* This Constructor will be Called when Login is Successful */
-        public frmMain(Employee emp):this()
+        public frmMain(Employee empLogin):this()
         {
-            if (emp == null) throw new ArgumentNullException();
-            this.emp = emp;           
+            if (empLogin == null) throw new ArgumentNullException();
+            this.empLogin = empLogin;           
         }
 
         public frmMain()
@@ -55,6 +56,7 @@ namespace Mart
 
             /*Picture Account Event*/
             pbAccountImage.MouseHover += pbAccountImage_MouseHover;
+            pbAccountImage.Click += pbAccountImage_Click;
 
             /* Set Opacity Event to Main Form for First Load */
             this.Opacity = 0.1;
@@ -64,6 +66,7 @@ namespace Mart
             /* Set Event Banner Panel for Moving Main Form */
             pBanner.MouseDown += pBanner_MouseDown;           
             pBanner.MouseMove += pBanner_MouseMove;
+            pBanner.MouseUp += pBanner_MouseUp;
 
             /* Set Click Event to TitleBar Button */
             pbExit.Click +=DoClick;
@@ -86,6 +89,34 @@ namespace Mart
             btnBin.Click +=btnBin_Click;
         }
 
+        void pBanner_MouseUp(object sender, MouseEventArgs e)
+        {
+            /*Check Main Form Location*/          
+            if (this.Location.Y <= 0)
+            {
+                Left = Top = 0;
+                Width = WIDTH_NO_TASKBAR;
+                Height = HEIGHT_NO_TASKBAR;
+            }
+        }
+
+        void pbAccountImage_Click(object sender, EventArgs e)
+        {
+            if (empLogin != null)
+            {
+                frmProfile profile = new frmProfile(empLogin);
+                profile.FormClosed += profile_FormClosed;
+                profile.ShowDialog();
+            }
+        }
+
+        void profile_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            lblUsername.Text = empLogin.LastName + " " + empLogin.FirstName ;
+            pbAccountImage.Image = Image.FromStream(new MemoryStream(empLogin.Photo));
+            lblRole.Text = empLogin.Roles.Name;
+        }
+
         void pbAccountImage_MouseHover(object sender, EventArgs e)
         {
             ToolTip tt = new ToolTip();
@@ -95,16 +126,16 @@ namespace Mart
         void frmMain_Shown(object sender, EventArgs e)
         {
             /* Define role to All Users */
-            if (emp != null)
+            if (empLogin != null)
             {
-                if (emp.Roles.Name.CompareTo("Admin") != 0)
+                if (empLogin.Roles.Name.CompareTo("Admin") != 0)
                 {
                     btnUser.Enabled = false;
                 }
-                lblRole.Text = emp.Roles.Name;
-                lblUsername.Text = emp.UserName;
+                lblRole.Text = empLogin.Roles.Name;
+                lblUsername.Text = empLogin.LastName +" "+empLogin.FirstName;
 
-                pbAccountImage.Image = Image.FromStream(new MemoryStream(emp.Photo));     
+                pbAccountImage.Image = Image.FromStream(new MemoryStream(empLogin.Photo));     
             }            
         }
 
@@ -146,18 +177,18 @@ namespace Mart
         void pBanner_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
-            {                
+            {               
                 /* IF main Form is match the whole screen => we set it to Minimum size */                
                 if (Top == 0 && Left == 0 && Width == WIDTH_NO_TASKBAR && Height == HEIGHT_NO_TASKBAR)
                 {
                     Width = MINIMUM_WIDTH;
                     Height = MINIMUM_HEIGHT;
-                    this.CenterToScreen();
-                }
+                    this.CenterToScreen();    
+                }                
                 Point mousePose = Control.MousePosition;
                 mousePose.Offset(mouseLocation.X, mouseLocation.Y);
-                Location = mousePose;
-            }            
+                Location = mousePose;                               
+            }
         }        
 
         void pBanner_MouseDown(object sender, MouseEventArgs e)
@@ -310,8 +341,7 @@ namespace Mart
         }
 
         private void btnStock_Click(object sender, EventArgs e)
-        {
-            lblUsername.Text = "Jams Bonds abcdfedddteddcgt";
+        {            
             ClearMenuButtonColor();
             btnStock.BackColor = ButtonBackGround;       
 

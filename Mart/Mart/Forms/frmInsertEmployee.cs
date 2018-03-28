@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
 using Mart.InstanceClasses;
+using Mart.ControlClasses;
 namespace Mart.Forms
 {
     public partial class frmInsertEmployee : Form
@@ -68,6 +69,7 @@ namespace Mart.Forms
            username = emp.UserName;
            password = emp.Password;
 
+           
            txtEmployeeID.Text = emp.ID.ToString();
            txtFirstName.Text = emp.FirstName.ToString();
            txtLastName.Text = emp.LastName.ToString();
@@ -106,6 +108,9 @@ namespace Mart.Forms
             pbCloseDialog.MouseHover += DoHoverShowToolTip;
             pbMinimize.MouseHover += DoHoverShowToolTip;
 
+            pbEmployeePhoto.Click += pbEmployeePhoto_Click;
+            pbEmployeePhoto.MouseHover += pbEmployeePhoto_MouseHover;
+
             pBanner.MouseDown += DoMouseDown;            
             pBanner.MouseMove += DoMouseMove;
 
@@ -119,6 +124,47 @@ namespace Mart.Forms
             /* Key Press TextBox Event */
             txtFirstName.KeyPress += AllowTextOnly;
             txtLastName.KeyPress += AllowTextOnly;           
+        }
+
+        void pbEmployeePhoto_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip((PictureBox)sender,"Click to Preview");
+        }
+
+        void pbEmployeePhoto_Click(object sender, EventArgs e)
+        {
+            byte[] photo = null;
+            /*Insert new Employee*/
+            if (emp == null)
+            {
+                if (imagePath == "")
+                {
+                    object O = Mart.Properties.Resources.ResourceManager.GetObject("no");
+                    Image img = (Image)O;
+                    var ms = new MemoryStream();
+                    img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    photo = ms.ToArray();
+                }
+                else
+                {
+                    photo = File.ReadAllBytes(imagePath);
+                }
+            }
+            /*Update Employee*/
+            else
+            {
+                if (imagePath == "")
+                {
+                    photo = emp.Photo;
+                }
+                else
+                {
+                    photo = File.ReadAllBytes(imagePath);
+                }
+            }
+            frmPreviewPhoto preview = new frmPreviewPhoto(photo);
+            preview.ShowDialog();
         }
 
         private void DoMouseDown(object sender, MouseEventArgs e)
@@ -145,11 +191,7 @@ namespace Mart.Forms
                     }                    
                 }
             }
-            catch (InvalidOperationException ex)
-            {
-                //MessageBox.Show(ex.Message);
-            }
-            catch (InvalidCastException ex)
+            catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message);
             }
@@ -329,6 +371,11 @@ namespace Mart.Forms
                 RequiredMessage("Select Gender");
                 return false;
             }
+            else if (txtUserName.Text.Trim().CompareTo(username) != 0 && Controller.IsExistUsername(txtUserName.Text.Trim()))
+            {
+                RequiredMessage("This username is already exist!");
+                return false;                    
+            }
             if (chCreateAccount.Checked == true)
             {
                 if (txtUserName.Text.Trim() == ""){
@@ -365,7 +412,7 @@ namespace Mart.Forms
                            (rdMale.Checked)?"Male":"Female",
                            dtpBirthDate.Value,
                            txtUserName.Text.Trim(),
-                           txtNewPassword.Text.Trim(),
+                           ConvertHashCode.ConvertPasswordToHashCode(txtNewPassword.Text.Trim()),
                            new Role((int)cboRole.SelectedValue, cboRole.Text.Trim()),
                            true,
                            pho
@@ -377,20 +424,21 @@ namespace Mart.Forms
                 if (imagePath == "") pho = emp.Photo;  /* User didn't browse new Picture */
                 else pho = File.ReadAllBytes(imagePath); /* User browsed new Picture */
                 username = txtUserName.Text;
-                password = txtNewPassword.Text;
+                /*Check condition whether user change password or not*/
+                if (txtNewPassword.Text.Trim() == "") password = "";
+                else password = (emp.Password.Trim().CompareTo(txtNewPassword.Text.Trim()) == 0) ? emp.Password : ConvertHashCode.ConvertPasswordToHashCode(txtNewPassword.Text.Trim());
                 emp.SetEmployeeData(
                           emp.ID,
                           txtFirstName.Text.Trim(),
                           txtLastName.Text.Trim(),
                           (rdMale.Checked) ? "Male" : "Female",
                           dtpBirthDate.Value,
-                          txtUserName.Text.Trim(),
-                          txtNewPassword.Text.Trim(),
+                          username,
+                          password,
                           new Role((int)cboRole.SelectedValue, cboRole.Text.Trim()),
                           true,
                           pho
                         );
-
                 if (username != "") pbDeleteAccount.Visible = true;
 
                 /* Set Variable to Status unchanged any DATA after Saving (Updated) */

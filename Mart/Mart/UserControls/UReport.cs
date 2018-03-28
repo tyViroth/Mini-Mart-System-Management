@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Mart.DataModel;
+using Mart.Forms;
 
 namespace Mart
 {
@@ -27,9 +28,10 @@ namespace Mart
         public UReport()
         {
             InitializeComponent();
-            this.Load += UReport_Load;
+            AddUSupSoldIntoPanel();                        
             rdSold.CheckedChanged += rdSold_CheckedChanged;
-            rdImport.CheckedChanged += rdSold_CheckedChanged;            
+            rdImport.CheckedChanged += rdSold_CheckedChanged;
+            rdSold.Checked = true;
         }
 
         void rdSold_CheckedChanged(object sender, EventArgs e)
@@ -56,13 +58,7 @@ namespace Mart
             }
             subSold.Dock = DockStyle.Fill;
             pContainer.Controls.Add(subSold);
-        }
-      
-        void UReport_Load(object sender, EventArgs e)
-        {
-            rdSold.Checked = true;
-            AddUSupSoldIntoPanel();
-        }
-               
+            subSold.BringToFront();
+        }    
     }
 }

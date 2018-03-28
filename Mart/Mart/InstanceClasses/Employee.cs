@@ -15,7 +15,7 @@ namespace Mart.InstanceClasses
     public class Employee
     {
         public static event CreatedHandler Created = null;
-        public static event UpdatedHandler Updated = null;
+        public event UpdatedHandler Updated = null;
         public static event LoadedHandler Loaded = null;
 
         public static void LoadedInstance(int id, string firstName, string lastName, string gender, DateTime birthDate, string userName, string password, Role role, bool status, byte[] photo)

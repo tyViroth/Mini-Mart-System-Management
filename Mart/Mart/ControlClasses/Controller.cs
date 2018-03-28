@@ -58,23 +58,54 @@ namespace Mart
         public static void FillComboBoxValue(ComboBox cbo,string fieldID,string fieldDes,string procedureName)
         {            
             try
-            {
+            {                                
                 con.Open();
                 da = new SqlDataAdapter(procedureName,con);
                 dt = new DataTable();
                 da.Fill(dt);
                 cbo.DataSource = dt;
                 cbo.DisplayMember = fieldDes;
-                cbo.ValueMember = fieldID;
+                cbo.ValueMember = fieldID;                
             }
             catch (Exception e)
             {
-                MessageBox.Show("Fill combobox"+e.Message);
+                MessageBox.Show("Fill combobox: "+e.Message);
+            }
+            finally
+            {                
+                da.Dispose();
+                con.Close();
+            }
+        }
+
+        public static void FillComboBoxValue(ComboBox cbo, string fieldID, string fieldDes, string procedureName,int year)
+        {
+            cmd = null;
+            try
+            {
+                con.Open();
+                cmd = new SqlCommand(procedureName,con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@year",year);
+                da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cbo.DataSource = dt;
+                cbo.DisplayMember = fieldDes;
+                cbo.ValueMember = fieldID;                        
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Fill combobox: " + e.Message);
             }
             finally
             {
-                da.Dispose();
-                con.Close();
+                try
+                {                    
+                    da.Dispose();
+                    con.Close();
+                }
+                catch (NullReferenceException ex){ }
             }
         }
 
@@ -99,5 +130,34 @@ namespace Mart
             }           
             return auto;
         }
+
+        public static bool IsExistUsername(string value)
+        {
+            SqlDataReader sdr = null;
+            bool has = false;
+            try
+            {
+               
+                con.Open();
+                cmd = new SqlCommand("SELECT TOP 1 username FROM Employee WHERE username = @val;",con);
+                cmd.Parameters.AddWithValue("@val",value);
+                sdr = cmd.ExecuteReader();
+                if (sdr.HasRows) has = true;
+                else has = false;
+            }
+            catch (Exception e)
+            {
+                has = true;
+                MessageBox.Show(e.Message,"Check Exist Value");
+            }
+            finally
+            {
+                sdr.Close();
+                cmd.Dispose();
+                con.Close();
+            }
+            return has;
+        }
+
     }
 }
