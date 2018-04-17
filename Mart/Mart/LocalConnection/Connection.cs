@@ -11,7 +11,7 @@ namespace Mart
     { 
         public static SqlConnection getConnection()
         {
-            string conString = @"Data Source=THOURA-PC;Initial Catalog=Mart;Integrated Security=True";
+            string conString = @"Data Source=DESKTOP-SMEPSU4;Initial Catalog=Mart;Integrated Security=True";
             return new SqlConnection(conString);
         }
     }

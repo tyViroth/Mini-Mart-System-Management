@@ -157,6 +157,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SoldYearModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormInsertImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInsertImport.Designer.cs">
+      <DependentUpon>FormInsertImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmInsertEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,10 +188,13 @@
       <DependentUpon>frmRole.cs</DependentUpon>
     </Compile>
     <Compile Include="InstanceClasses\Employee.cs" />
+    <Compile Include="InstanceClasses\Import.cs" />
+    <Compile Include="InstanceClasses\ImportDetail.cs" />
+    <Compile Include="InstanceClasses\Product.cs" />
     <Compile Include="InstanceClasses\Role.cs" />
+    <Compile Include="InstanceClasses\Supplier.cs" />
     <Compile Include="Intefaces\IFunctionModel.cs" />
     <Compile Include="Intefaces\IMessageType.cs" />
-    <Compile Include="InstanceClasses\Product.cs" />
     <Compile Include="LocalConnection\Connection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -249,6 +258,9 @@
     <Compile Include="UserControls\USubSold.Designer.cs">
       <DependentUpon>USubSold.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\FormInsertImport.resx">
+      <DependentUpon>FormInsertImport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInsertEmployee.resx">
       <DependentUpon>frmInsertEmployee.cs</DependentUpon>
     </EmbeddedResource>
