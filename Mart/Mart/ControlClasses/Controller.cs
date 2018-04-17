@@ -56,24 +56,25 @@ namespace Mart
         }
 
         public static void FillComboBoxValue(ComboBox cbo,string fieldID,string fieldDes,string procedureName)
-        {            
+        {    
             try
-            {                                
+            {
+                if (con.State == ConnectionState.Closed)
                 con.Open();
                 da = new SqlDataAdapter(procedureName,con);
                 dt = new DataTable();
                 da.Fill(dt);
                 cbo.DataSource = dt;
                 cbo.DisplayMember = fieldDes;
-                cbo.ValueMember = fieldID;                
+                cbo.ValueMember = fieldID;             
             }
             catch (Exception e)
             {
                 MessageBox.Show("Fill combobox: "+e.Message);
             }
             finally
-            {                
-                da.Dispose();
+            {
+                if (con.State == ConnectionState.Open)                  
                 con.Close();
             }
         }
@@ -83,7 +84,8 @@ namespace Mart
             cmd = null;
             try
             {
-                con.Open();
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
                 cmd = new SqlCommand(procedureName,con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@year",year);
@@ -101,9 +103,9 @@ namespace Mart
             finally
             {
                 try
-                {                    
-                    da.Dispose();
-                    con.Close();
+                {                                        
+                    if (con.State == ConnectionState.Open)
+                        con.Close();
                 }
                 catch (NullReferenceException ex){ }
             }
@@ -124,9 +126,16 @@ namespace Mart
                 MessageBox.Show(e.Message);
             }
             finally
-            {                
-                con.Close();
-                cmd.Dispose();
+            {
+                try
+                {
+                    con.Close();
+                    cmd.Dispose();
+                }
+                catch (NullReferenceException)
+                {
+                                   
+                }
             }           
             return auto;
         }

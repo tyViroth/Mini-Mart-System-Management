@@ -1,0 +1,236 @@
+﻿namespace Mart.Forms
+{
+    partial class SoldInfo
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SoldInfo));
+            this.dgvSoldDetail = new System.Windows.Forms.DataGridView();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnDetails = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.cboSearchType = new System.Windows.Forms.ComboBox();
+            this.txtSearchBox = new System.Windows.Forms.TextBox();
+            this.dtpSoldDate = new System.Windows.Forms.DateTimePicker();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSoldDetail)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dgvSoldDetail
+            // 
+            this.dgvSoldDetail.AllowUserToAddRows = false;
+            this.dgvSoldDetail.AllowUserToDeleteRows = false;
+            this.dgvSoldDetail.AllowUserToResizeColumns = false;
+            this.dgvSoldDetail.AllowUserToResizeRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.dgvSoldDetail.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvSoldDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvSoldDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSoldDetail.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvSoldDetail.ColumnHeadersHeight = 25;
+            this.dgvSoldDetail.Location = new System.Drawing.Point(12, 74);
+            this.dgvSoldDetail.Name = "dgvSoldDetail";
+            this.dgvSoldDetail.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvSoldDetail.RowHeadersVisible = false;
+            this.dgvSoldDetail.RowTemplate.Height = 25;
+            this.dgvSoldDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSoldDetail.Size = new System.Drawing.Size(1003, 406);
+            this.dgvSoldDetail.TabIndex = 2;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.AutoSize = true;
+            this.btnDelete.BackColor = System.Drawing.SystemColors.Window;
+            this.btnDelete.BackgroundImage = global::Mart.Properties.Resources.ic_delete_forever_black_48dp_1x;
+            this.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDelete.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 6F);
+            this.btnDelete.Location = new System.Drawing.Point(236, 18);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(27, 27);
+            this.btnDelete.TabIndex = 1;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.AutoSize = true;
+            this.btnEdit.BackColor = System.Drawing.SystemColors.Window;
+            this.btnEdit.BackgroundImage = global::Mart.Properties.Resources.ic_mode_edit_black_48dp_1x;
+            this.btnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 6F);
+            this.btnEdit.Location = new System.Drawing.Point(203, 18);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(27, 27);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.UseVisualStyleBackColor = false;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.AutoSize = true;
+            this.btnSearch.BackColor = System.Drawing.SystemColors.Window;
+            this.btnSearch.BackgroundImage = global::Mart.Properties.Resources.ic_search_black_36dp_1x;
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 6F);
+            this.btnSearch.Location = new System.Drawing.Point(170, 18);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(27, 27);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRefresh.BackgroundImage")));
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnRefresh.Location = new System.Drawing.Point(787, 2);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(78, 67);
+            this.btnRefresh.TabIndex = 6;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            // 
+            // btnDetails
+            // 
+            this.btnDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDetails.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDetails.BackgroundImage")));
+            this.btnDetails.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnDetails.FlatAppearance.BorderSize = 0;
+            this.btnDetails.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDetails.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnDetails.Location = new System.Drawing.Point(866, 1);
+            this.btnDetails.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(78, 67);
+            this.btnDetails.TabIndex = 5;
+            this.btnDetails.Text = "Details";
+            this.btnDetails.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDetails.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdate.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUpdate.BackgroundImage")));
+            this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnUpdate.FlatAppearance.BorderSize = 0;
+            this.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnUpdate.Location = new System.Drawing.Point(948, 2);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(78, 67);
+            this.btnUpdate.TabIndex = 4;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            // 
+            // cboSearchType
+            // 
+            this.cboSearchType.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboSearchType.FormattingEnabled = true;
+            this.cboSearchType.Location = new System.Drawing.Point(12, 19);
+            this.cboSearchType.Name = "cboSearchType";
+            this.cboSearchType.Size = new System.Drawing.Size(153, 25);
+            this.cboSearchType.TabIndex = 7;
+            // 
+            // txtSearchBox
+            // 
+            this.txtSearchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSearchBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchBox.Location = new System.Drawing.Point(15, 22);
+            this.txtSearchBox.Name = "txtSearchBox";
+            this.txtSearchBox.Size = new System.Drawing.Size(125, 18);
+            this.txtSearchBox.TabIndex = 8;
+            // 
+            // dtpSoldDate
+            // 
+            this.dtpSoldDate.CalendarFont = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpSoldDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpSoldDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpSoldDate.Location = new System.Drawing.Point(12, 19);
+            this.dtpSoldDate.Name = "dtpSoldDate";
+            this.dtpSoldDate.Size = new System.Drawing.Size(138, 25);
+            this.dtpSoldDate.TabIndex = 9;
+            // 
+            // SoldInfo
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ClientSize = new System.Drawing.Size(1027, 492);
+            this.Controls.Add(this.dtpSoldDate);
+            this.Controls.Add(this.txtSearchBox);
+            this.Controls.Add(this.cboSearchType);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnDetails);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.dgvSoldDetail);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnSearch);
+            this.Name = "SoldInfo";
+            this.Text = "SoldInfo";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSoldDetail)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.DataGridView dgvSoldDetail;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnDetails;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.ComboBox cboSearchType;
+        private System.Windows.Forms.TextBox txtSearchBox;
+        private System.Windows.Forms.DateTimePicker dtpSoldDate;
+    }
+}

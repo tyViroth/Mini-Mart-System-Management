@@ -48,9 +48,12 @@
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reflection.Context" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
@@ -182,28 +185,34 @@
     <Compile Include="Forms\frmRole.Designer.cs">
       <DependentUpon>frmRole.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmLoadSoldDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmLoadSoldDetail.Designer.cs">
-      <DependentUpon>frmLoadSoldDetail.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\frmProductDetails.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmProductDetails.designer.cs">
       <DependentUpon>frmProductDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SoldInfo.cs">
+    <Compile Include="Forms\frmSendSMS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SoldInfo.Designer.cs">
-      <DependentUpon>SoldInfo.cs</DependentUpon>
+    <Compile Include="Forms\frmSendSMS.Designer.cs">
+      <DependentUpon>frmSendSMS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmServerConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmServerConnection.Designer.cs">
+      <DependentUpon>frmServerConnection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSoldInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSoldInformation.Designer.cs">
+      <DependentUpon>frmSoldInformation.cs</DependentUpon>
     </Compile>
     <Compile Include="InstanceClasses\Employee.cs" />
     <Compile Include="InstanceClasses\Role.cs" />
+    <Compile Include="InstanceClasses\SellProduct.cs" />
     <Compile Include="InstanceClasses\sold.cs" />
-    <Compile Include="InstanceClasses\Stock.cs" />
     <Compile Include="Intefaces\IFunctionModel.cs" />
     <Compile Include="Intefaces\IMessageType.cs" />
     <Compile Include="InstanceClasses\Product.cs" />
@@ -251,6 +260,12 @@
     <Compile Include="UserControls\UReport.Designer.cs">
       <DependentUpon>UReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\USelling.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\USelling.Designer.cs">
+      <DependentUpon>USelling.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\USetting.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -263,11 +278,11 @@
     <Compile Include="UserControls\USold.Designer.cs">
       <DependentUpon>USold.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\USubSold.cs">
+    <Compile Include="UserControls\USubSoldReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\USubSold.Designer.cs">
-      <DependentUpon>USubSold.cs</DependentUpon>
+    <Compile Include="UserControls\USubSoldReport.Designer.cs">
+      <DependentUpon>USubSoldReport.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\frmCategory.resx">
       <DependentUpon>frmCategory.cs</DependentUpon>
@@ -293,14 +308,17 @@
     <EmbeddedResource Include="Forms\frmRole.resx">
       <DependentUpon>frmRole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmLoadSoldDetail.resx">
-      <DependentUpon>frmLoadSoldDetail.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmProductDetails.resx">
       <DependentUpon>frmProductDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SoldInfo.resx">
-      <DependentUpon>SoldInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmSendSMS.resx">
+      <DependentUpon>frmSendSMS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmServerConnection.resx">
+      <DependentUpon>frmServerConnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSoldInformation.resx">
+      <DependentUpon>frmSoldInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -325,14 +343,17 @@
     <EmbeddedResource Include="UserControls\UReport.resx">
       <DependentUpon>UReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\USelling.resx">
+      <DependentUpon>USelling.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\USetting.resx">
       <DependentUpon>USetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\USold.resx">
       <DependentUpon>USold.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\USubSold.resx">
-      <DependentUpon>USubSold.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\USubSoldReport.resx">
+      <DependentUpon>USubSoldReport.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <EntityDeploy Include="DataModel\EmployeeModel.edmx">
@@ -399,12 +420,21 @@
       <LastGenOutput>SoldModel.cs</LastGenOutput>
     </Content>
     <Content Include="preview_icon.ico" />
+    <None Include="Resources\Sell_32.png" />
+    <None Include="Resources\Connection_32.png" />
+    <None Include="Resources\background connection.jpg" />
+    <None Include="Resources\AddNew_32.png" />
     <Content Include="Resources\delete.png" />
+    <None Include="Resources\delete_32.png" />
     <Content Include="Resources\delete_48.png" />
     <Content Include="Resources\edit_48.png" />
     <None Include="Resources\ic_search_black_36dp_1x.png" />
     <None Include="Resources\ic_mode_edit_black_48dp_1x.png" />
     <None Include="Resources\ic_delete_forever_black_48dp_1x.png" />
+    <None Include="Resources\Excel_48.png" />
+    <None Include="Resources\Excel_32.png" />
+    <None Include="Resources\role_32.png" />
+    <None Include="Resources\Sales_history_32.png" />
     <Content Include="Resources\search_36.png" />
     <None Include="Resources\collapse_48.png" />
     <None Include="Resources\Search_48.png" />

@@ -31,29 +31,29 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pContainer = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pbShow = new System.Windows.Forms.PictureBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pbUsername = new System.Windows.Forms.PictureBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pbPassword = new System.Windows.Forms.PictureBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.pbCancel = new System.Windows.Forms.PictureBox();
             this.timeLogin = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.pContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbShow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCancel)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUsername)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCancel)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -95,32 +95,6 @@
             this.pContainer.Name = "pContainer";
             this.pContainer.Size = new System.Drawing.Size(333, 428);
             this.pContainer.TabIndex = 0;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = global::Mart.Properties.Resources.lock_px;
-            this.pictureBox2.Location = new System.Drawing.Point(1, 1);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(28, 28);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 11;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::Mart.Properties.Resources.Employee_48;
-            this.pictureBox1.Location = new System.Drawing.Point(1, 1);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 28);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
             // 
             // label5
             // 
@@ -186,18 +160,6 @@
             this.pbShow.TabStop = false;
             this.pbShow.Visible = false;
             // 
-            // txtPassword
-            // 
-            this.txtPassword.BackColor = System.Drawing.Color.White;
-            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(37, 3);
-            this.txtPassword.MaxLength = 20;
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(213, 22);
-            this.txtPassword.TabIndex = 3;
-            this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -213,6 +175,29 @@
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.pbUsername);
+            this.panel1.Controls.Add(this.txtUsername);
+            this.panel1.Location = new System.Drawing.Point(31, 241);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(269, 30);
+            this.panel1.TabIndex = 12;
+            // 
+            // pbUsername
+            // 
+            this.pbUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbUsername.BackColor = System.Drawing.Color.Transparent;
+            this.pbUsername.Image = global::Mart.Properties.Resources.Employee_48;
+            this.pbUsername.Location = new System.Drawing.Point(1, 1);
+            this.pbUsername.Margin = new System.Windows.Forms.Padding(0);
+            this.pbUsername.Name = "pbUsername";
+            this.pbUsername.Size = new System.Drawing.Size(28, 28);
+            this.pbUsername.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbUsername.TabIndex = 10;
+            this.pbUsername.TabStop = false;
+            // 
             // txtUsername
             // 
             this.txtUsername.BackColor = System.Drawing.Color.White;
@@ -223,7 +208,44 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(213, 22);
             this.txtUsername.TabIndex = 2;
+            this.txtUsername.Text = "laib";
             this.txtUsername.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.pbPassword);
+            this.panel2.Controls.Add(this.txtPassword);
+            this.panel2.Location = new System.Drawing.Point(31, 279);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(269, 30);
+            this.panel2.TabIndex = 13;
+            // 
+            // pbPassword
+            // 
+            this.pbPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbPassword.BackColor = System.Drawing.Color.Transparent;
+            this.pbPassword.Image = global::Mart.Properties.Resources.lock_px;
+            this.pbPassword.Location = new System.Drawing.Point(1, 1);
+            this.pbPassword.Margin = new System.Windows.Forms.Padding(0);
+            this.pbPassword.Name = "pbPassword";
+            this.pbPassword.Size = new System.Drawing.Size(28, 28);
+            this.pbPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPassword.TabIndex = 11;
+            this.pbPassword.TabStop = false;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.BackColor = System.Drawing.Color.White;
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(37, 3);
+            this.txtPassword.MaxLength = 20;
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(213, 22);
+            this.txtPassword.TabIndex = 3;
+            this.txtPassword.Text = "1111";
+            this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pbCancel
             // 
@@ -238,26 +260,6 @@
             this.pbCancel.TabStop = false;
             this.pbCancel.Click += new System.EventHandler(this.pbCancel_Click);
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.txtUsername);
-            this.panel1.Location = new System.Drawing.Point(31, 241);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(269, 30);
-            this.panel1.TabIndex = 12;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Controls.Add(this.txtPassword);
-            this.panel2.Location = new System.Drawing.Point(31, 279);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(269, 30);
-            this.panel2.TabIndex = 13;
-            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,15 +273,15 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pContainer.ResumeLayout(false);
             this.pContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbShow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCancel)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUsername)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCancel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -298,8 +300,8 @@
         private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Timer timeLogin;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbPassword;
+        private System.Windows.Forms.PictureBox pbUsername;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
     }

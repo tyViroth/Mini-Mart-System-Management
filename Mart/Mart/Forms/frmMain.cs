@@ -16,8 +16,7 @@ using System.IO;
 namespace Mart
 {
     public partial class frmMain : Form
-    {
-        List<Panel> listPanel = new List<Panel>();
+    {    
         Point mouseLocation;
         readonly int MINIMUM_WIDTH = 1000;
         readonly int MINIMUM_HEIGHT = 700;
@@ -25,15 +24,7 @@ namespace Mart
         readonly int HEIGHT_NO_TASKBAR = Screen.PrimaryScreen.WorkingArea.Height;
         private readonly Color ButtonBackGround = Color.FromArgb(255, 205, 65);        
 
-        private Employee empLogin;
-
-        /* This Constructor will be Called when Login is Successful */
-        public frmMain(Employee empLogin):this()
-        {
-            if (empLogin == null) throw new ArgumentNullException();
-            this.empLogin = empLogin;           
-        }
-
+        /* This Constructor will be Called when Login is Successful */        
         public frmMain()
         {
             InitializeComponent();
@@ -81,7 +72,7 @@ namespace Mart
             /* Register Manu Buttons */
             btnUser.Click +=btnUser_Click;
             btnStock.Click +=btnStock_Click;
-            btnSold.Click +=btnSold_Click;
+            btnSelling.Click +=btnSelling_Click;
             btnSetting.Click +=btnSetting_Click;
             btnReport.Click +=btnReport_Click;
             btnProduct.Click +=btnProduct_Click;
@@ -102,9 +93,9 @@ namespace Mart
 
         void pbAccountImage_Click(object sender, EventArgs e)
         {
-            if (empLogin != null)
+            if (Program.empLogin != null)
             {
-                frmProfile profile = new frmProfile(empLogin);
+                frmProfile profile = new frmProfile(Program.empLogin);
                 profile.FormClosed += profile_FormClosed;
                 profile.ShowDialog();
             }
@@ -112,9 +103,9 @@ namespace Mart
 
         void profile_FormClosed(object sender, FormClosedEventArgs e)
         {
-            lblUsername.Text = empLogin.LastName + " " + empLogin.FirstName ;
-            pbAccountImage.Image = Image.FromStream(new MemoryStream(empLogin.Photo));
-            lblRole.Text = empLogin.Roles.Name;
+            lblUsername.Text = Program.empLogin.LastName + " " + Program.empLogin.FirstName;
+            pbAccountImage.Image = Image.FromStream(new MemoryStream(Program.empLogin.Photo));
+            lblRole.Text = Program.empLogin.Roles.Name;
         }
 
         void pbAccountImage_MouseHover(object sender, EventArgs e)
@@ -126,16 +117,16 @@ namespace Mart
         void frmMain_Shown(object sender, EventArgs e)
         {
             /* Define role to All Users */
-            if (empLogin != null)
+            if (Program.empLogin != null)
             {
-                if (empLogin.Roles.Name.CompareTo("Admin") != 0)
+                if (Program.empLogin.Roles.Name.CompareTo("Admin") != 0)
                 {
                     btnUser.Enabled = false;
                 }
-                lblRole.Text = empLogin.Roles.Name;
-                lblUsername.Text = empLogin.LastName +" "+empLogin.FirstName;
+                lblRole.Text = Program.empLogin.Roles.Name;
+                lblUsername.Text = Program.empLogin.LastName + " " + Program.empLogin.FirstName;
 
-                pbAccountImage.Image = Image.FromStream(new MemoryStream(empLogin.Photo));     
+                pbAccountImage.Image = Image.FromStream(new MemoryStream(Program.empLogin.Photo));     
             }            
         }
 
@@ -247,7 +238,7 @@ namespace Mart
         {
             btnUser.BackColor = Color.Transparent;
             btnStock.BackColor = Color.Transparent;
-            btnSold.BackColor = Color.Transparent;
+            btnSelling.BackColor = Color.Transparent;
             btnSetting.BackColor = Color.Transparent;
             btnReport.BackColor = Color.Transparent;
             btnProduct.BackColor = Color.Transparent;
@@ -323,20 +314,20 @@ namespace Mart
             }
         }
 
-        private void btnSold_Click(object sender, EventArgs e)
+        private void btnSelling_Click(object sender, EventArgs e)
         {
             ClearMenuButtonColor();
-            btnSold.BackColor = ButtonBackGround;       
+            btnSelling.BackColor = ButtonBackGround;
 
-            if (!mainPanel.Controls.Contains(USold.Instance))
+            if (!mainPanel.Controls.Contains(USelling.Instance))
             {
-                mainPanel.Controls.Add(USold.Instance);
-                USold.Instance.Dock = DockStyle.Fill;
-                USold.Instance.BringToFront();
+                mainPanel.Controls.Add(USelling.Instance);
+                USelling.Instance.Dock = DockStyle.Fill;
+                USelling.Instance.BringToFront();
             }
             else
             {
-                USold.Instance.BringToFront();
+                USelling.Instance.BringToFront();
             }
         }
 

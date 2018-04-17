@@ -27,7 +27,8 @@ namespace Mart
         public UBin()
         {
             InitializeComponent();
-            tpEmployee.Click += tpEmployee_Click;                
+            tpEmployee.Click += tpEmployee_Click;
+            tpEmployee_Click(tpEmployee, null);  
         }
 
         void tpEmployee_Click(object sender, EventArgs e)
@@ -39,11 +40,6 @@ namespace Mart
             }
             binEmp.Dock = DockStyle.Fill;
             tpEmployee.Controls.Add(binEmp);          
-        }
-
-        private void UBin_Load(object sender, EventArgs e)
-        {
-            tpEmployee_Click(tpEmployee, e);
         }
 
     }

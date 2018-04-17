@@ -38,7 +38,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnStock = new System.Windows.Forms.Button();
-            this.btnSold = new System.Windows.Forms.Button();
+            this.btnSelling = new System.Windows.Forms.Button();
             this.btnBin = new System.Windows.Forms.Button();
             this.btnProduct = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
@@ -109,7 +109,7 @@
             this.tableLayoutPanel3.Controls.Add(this.btnExit, 1, 7);
             this.tableLayoutPanel3.Controls.Add(this.btnSetting, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.btnStock, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btnSold, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.btnSelling, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.btnBin, 1, 6);
             this.tableLayoutPanel3.Controls.Add(this.btnProduct, 1, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -285,36 +285,36 @@
             this.btnStock.UseMnemonic = false;
             this.btnStock.UseVisualStyleBackColor = false;
             // 
-            // btnSold
+            // btnSelling
             // 
-            this.btnSold.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnSelling.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSold.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSold.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(158)))));
-            this.btnSold.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSold.BackgroundImage")));
-            this.btnSold.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tableLayoutPanel3.SetColumnSpan(this.btnSold, 2);
-            this.btnSold.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnSold.FlatAppearance.BorderSize = 0;
-            this.btnSold.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(205)))), ((int)(((byte)(65)))));
-            this.btnSold.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(205)))), ((int)(((byte)(65)))));
-            this.btnSold.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(205)))), ((int)(((byte)(65)))));
-            this.btnSold.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSold.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSold.ForeColor = System.Drawing.Color.White;
-            this.btnSold.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSold.Location = new System.Drawing.Point(0, 68);
-            this.btnSold.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSold.Name = "btnSold";
-            this.btnSold.Size = new System.Drawing.Size(70, 68);
-            this.btnSold.TabIndex = 6;
-            this.btnSold.Text = "Sold";
-            this.btnSold.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSold.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSold.UseCompatibleTextRendering = true;
-            this.btnSold.UseMnemonic = false;
-            this.btnSold.UseVisualStyleBackColor = false;
+            this.btnSelling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSelling.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(158)))));
+            this.btnSelling.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSelling.BackgroundImage")));
+            this.btnSelling.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.tableLayoutPanel3.SetColumnSpan(this.btnSelling, 2);
+            this.btnSelling.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnSelling.FlatAppearance.BorderSize = 0;
+            this.btnSelling.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(205)))), ((int)(((byte)(65)))));
+            this.btnSelling.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(205)))), ((int)(((byte)(65)))));
+            this.btnSelling.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(205)))), ((int)(((byte)(65)))));
+            this.btnSelling.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelling.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelling.ForeColor = System.Drawing.Color.White;
+            this.btnSelling.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSelling.Location = new System.Drawing.Point(0, 68);
+            this.btnSelling.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSelling.Name = "btnSelling";
+            this.btnSelling.Size = new System.Drawing.Size(70, 68);
+            this.btnSelling.TabIndex = 6;
+            this.btnSelling.Text = "Selling";
+            this.btnSelling.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSelling.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSelling.UseCompatibleTextRendering = true;
+            this.btnSelling.UseMnemonic = false;
+            this.btnSelling.UseVisualStyleBackColor = false;
             // 
             // btnBin
             // 
@@ -553,7 +553,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnSetting;
         private System.Windows.Forms.Button btnStock;
-        private System.Windows.Forms.Button btnSold;
+        private System.Windows.Forms.Button btnSelling;
         private System.Windows.Forms.Button btnBin;
         private System.Windows.Forms.Button btnProduct;
         private System.Windows.Forms.Panel mainPanel;

@@ -22,9 +22,7 @@ namespace Mart.Forms
         private readonly int HEIGHT_NO_TASKBAR = Screen.PrimaryScreen.WorkingArea.Height;
         private readonly string userHolder = "Enter Username";
         private readonly string passHolder = "Enter Password";
-
-        private Employee emp;
-
+     
         public frmLogin()
         {
             InitializeComponent();
@@ -68,7 +66,21 @@ namespace Mart.Forms
             pContainer.Click += pContainer_Click;
             this.Shown += frmLogin_Shown;
 
-            Employee.Created += Employee_Created;            
+            Employee.Created += Employee_Created;
+            pbUsername.MouseHover += pbUsername_MouseHover;
+            pbPassword.MouseHover += pbPassword_MouseHover;
+        }
+
+        void pbPassword_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(pbPassword,"Password");
+        }
+
+        void pbUsername_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(pbUsername, "Username");
         }
 
         void frmLogin_Shown(object sender, EventArgs e)
@@ -102,7 +114,7 @@ namespace Mart.Forms
 
         void Employee_Created(Employee emp)
         {
-            this.emp = emp;           
+            Program.empLogin = emp;           
         }
 
         private void DoLoginConfirmed(object sender, EventArgs e)
@@ -148,13 +160,13 @@ namespace Mart.Forms
                 con.Close();                
             }
 
-            if (emp == null)
+            if (Program.empLogin == null)
             {
                 MessageError("Username or Password is incorrect","Login");
             }
             else
             {
-                frmMain frm = new frmMain(emp);
+                frmMain frm = new frmMain();
                 this.Hide();
                 frm.ShowDialog();                
             }

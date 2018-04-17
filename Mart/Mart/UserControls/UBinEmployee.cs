@@ -21,11 +21,20 @@ namespace Mart.UserControls
         {
             InitializeComponent();
             RegisterEvent();
+
+            Controller.FillComboBoxValue(cboRole, "roleID", "roleName", "SetRoleToComboBox");
+            cboRole.SelectedIndex = -1;
+
+            /* Load Data to DataGridView without conditioin "" */
+            RefreshDataGridview("", -1, false);
+
+            cboSearch.DataSource = searchBy;
+            cboSearch.SelectedIndex = 0;
+            txtSearch.Text = cboSearch.SelectedValue as string;
         }
 
         private void RegisterEvent()
-        {
-            this.Load += UBinEmployee_Load;            
+        {     
 
             /* Search Option */
             cboSearch.SelectedValueChanged += cboSearch_SelectedValueChanged;
@@ -168,19 +177,6 @@ namespace Mart.UserControls
         {
             txtSearch.Text = cboSearch.SelectedValue as string;
             placeHolderText = cboSearch.SelectedValue as string;
-        }
-
-        void UBinEmployee_Load(object sender, EventArgs e)
-        {
-            Controller.FillComboBoxValue(cboRole, "roleID", "roleName", "SetRoleToComboBox");
-            cboRole.SelectedIndex = -1;
-
-            /* Load Data to DataGridView without conditioin "" */
-            RefreshDataGridview("", -1, false); 
-            
-            cboSearch.DataSource = searchBy;
-            cboSearch.SelectedIndex = 0;
-            txtSearch.Text = cboSearch.SelectedValue as string;
         }
 
         public void MessageSuccess(string des, string title)

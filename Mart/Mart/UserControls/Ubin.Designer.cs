@@ -64,13 +64,13 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tc, 0, 0);
             this.tableLayoutPanel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(11, 14);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(18, 19);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(791, 483);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(780, 472);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tc
@@ -89,7 +89,7 @@
             this.tc.Name = "tc";
             this.tc.Padding = new System.Drawing.Point(0, 0);
             this.tc.SelectedIndex = 0;
-            this.tc.Size = new System.Drawing.Size(791, 483);
+            this.tc.Size = new System.Drawing.Size(780, 472);
             this.tc.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tc.TabIndex = 1;
             // 
@@ -98,7 +98,7 @@
             this.tpEmployee.Location = new System.Drawing.Point(4, 26);
             this.tpEmployee.Margin = new System.Windows.Forms.Padding(0);
             this.tpEmployee.Name = "tpEmployee";
-            this.tpEmployee.Size = new System.Drawing.Size(783, 453);
+            this.tpEmployee.Size = new System.Drawing.Size(772, 442);
             this.tpEmployee.TabIndex = 0;
             this.tpEmployee.Text = "Employee";
             this.tpEmployee.UseVisualStyleBackColor = true;
@@ -109,7 +109,7 @@
             this.tpRole.Location = new System.Drawing.Point(4, 26);
             this.tpRole.Margin = new System.Windows.Forms.Padding(0);
             this.tpRole.Name = "tpRole";
-            this.tpRole.Size = new System.Drawing.Size(783, 453);
+            this.tpRole.Size = new System.Drawing.Size(772, 442);
             this.tpRole.TabIndex = 1;
             this.tpRole.Text = "Role";
             this.tpRole.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             this.tpImportStock.Location = new System.Drawing.Point(4, 26);
             this.tpImportStock.Margin = new System.Windows.Forms.Padding(0);
             this.tpImportStock.Name = "tpImportStock";
-            this.tpImportStock.Size = new System.Drawing.Size(783, 453);
+            this.tpImportStock.Size = new System.Drawing.Size(772, 442);
             this.tpImportStock.TabIndex = 2;
             this.tpImportStock.Text = "Import Stock";
             this.tpImportStock.UseVisualStyleBackColor = true;
@@ -153,7 +153,7 @@
             this.tpSoldProduct.Location = new System.Drawing.Point(4, 26);
             this.tpSoldProduct.Margin = new System.Windows.Forms.Padding(0);
             this.tpSoldProduct.Name = "tpSoldProduct";
-            this.tpSoldProduct.Size = new System.Drawing.Size(783, 453);
+            this.tpSoldProduct.Size = new System.Drawing.Size(772, 442);
             this.tpSoldProduct.TabIndex = 3;
             this.tpSoldProduct.Text = "Sold Product";
             this.tpSoldProduct.UseVisualStyleBackColor = true;
@@ -175,7 +175,7 @@
             this.tpProduct.Location = new System.Drawing.Point(4, 26);
             this.tpProduct.Margin = new System.Windows.Forms.Padding(0);
             this.tpProduct.Name = "tpProduct";
-            this.tpProduct.Size = new System.Drawing.Size(783, 453);
+            this.tpProduct.Size = new System.Drawing.Size(772, 442);
             this.tpProduct.TabIndex = 4;
             this.tpProduct.Text = "Product";
             this.tpProduct.UseVisualStyleBackColor = true;
@@ -197,7 +197,7 @@
             this.tpCategory.Location = new System.Drawing.Point(4, 26);
             this.tpCategory.Margin = new System.Windows.Forms.Padding(0);
             this.tpCategory.Name = "tpCategory";
-            this.tpCategory.Size = new System.Drawing.Size(783, 453);
+            this.tpCategory.Size = new System.Drawing.Size(772, 442);
             this.tpCategory.TabIndex = 5;
             this.tpCategory.Text = "Category";
             this.tpCategory.UseVisualStyleBackColor = true;
@@ -219,7 +219,7 @@
             this.tpSupplier.Location = new System.Drawing.Point(4, 26);
             this.tpSupplier.Name = "tpSupplier";
             this.tpSupplier.Padding = new System.Windows.Forms.Padding(3);
-            this.tpSupplier.Size = new System.Drawing.Size(783, 453);
+            this.tpSupplier.Size = new System.Drawing.Size(772, 442);
             this.tpSupplier.TabIndex = 6;
             this.tpSupplier.Text = "Supplier";
             this.tpSupplier.UseVisualStyleBackColor = true;
@@ -244,7 +244,6 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UBin";
             this.Size = new System.Drawing.Size(814, 508);
-            this.Load += new System.EventHandler(this.UBin_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tc.ResumeLayout(false);
             this.tpRole.ResumeLayout(false);

@@ -76,9 +76,9 @@ namespace Mart
 
         private void SetBottomInformationToTextBox()
         {
-            txtEmployeeNumber.Text = dgvEmployee.Rows.Count.ToString();
-            txtFemaleNumber.Text = femaleNumber.ToString();
-            txtAccountNumber.Text = AccoutNumber.ToString();
+            lblEmployeeNumber.Text = dgvEmployee.Rows.Count.ToString();
+            lblFemaleNumber.Text = femaleNumber.ToString();
+            lblAccountNumber.Text = AccoutNumber.ToString();
 
         }
 
@@ -101,7 +101,6 @@ namespace Mart
             btnExport.Click += DoClick;
             btnRefresh.Click += DoClick;
             btnRoleDetails.Click += DoClick;
-            btnPrint.Click += DoClick;
 
             cboRole.SelectedValueChanged += cboRole_SelectedValueChanged;
             txtSearch.KeyDown += KeyDownEnter;
@@ -546,7 +545,6 @@ namespace Mart
             btnUpdate.Enabled = ena;
             btnDelete.Enabled = ena;
             btnExport.Enabled = ena;
-            btnPrint.Enabled = ena;
         }
 
         private void RefreshBottomInformation()
@@ -560,7 +558,6 @@ namespace Mart
             }
             SetBottomInformationToTextBox();            
         }
-
     }
        
 }
