@@ -137,6 +137,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SoldModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormInsertImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInsertImport.Designer.cs">
+      <DependentUpon>FormInsertImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmCategory.cs">
       <SubType>Form</SubType>
     </Compile>
