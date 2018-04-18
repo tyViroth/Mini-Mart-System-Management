@@ -365,6 +365,7 @@ namespace Mart.Forms
             txtSearchBox.Text = cboSearchType.Text;
             if (cboSearchType.SelectedIndex == 0)
             {
+                dtpSoldDate.Visible = false;
                 txtSearchBox.ReadOnly = true;
                 txtSearchBox.BackColor = Color.White;
             }

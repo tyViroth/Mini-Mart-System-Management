@@ -17,7 +17,7 @@ using Mart.InstanceClasses;
 
 namespace Mart
 {
-    public partial class USold : UserControl, IFunctionModel<sold>, IMessageType
+    public partial class USold : UserControl, IMessageType
     {
         List<SellProduct> productList = null;
         public SqlCommand cmd = null;
@@ -44,7 +44,7 @@ namespace Mart
         {
             InitializeComponent();
             EventRegister();                                           
-            LoadProductToCombobox();
+            LoadDataToCombobox();
             ControllDataGrid();
         }
 
@@ -65,12 +65,10 @@ namespace Mart
 
             txtQty.TextChanged += DoTextChange;
             txtDiscount.TextChanged += DoTextChange;
-            txtTax.TextChanged += DoTextChange;
-
-            txtQty.KeyDown += txtQty_KeyDown;
-            txtQty.LostFocus += txtQty_LostFocus;
+            txtTax.TextChanged += DoTextChange;              
 
             cboProductName.SelectedIndexChanged += cboProductName_SelectedIndexChanged;
+            cboImportID.SelectedIndexChanged += cboImportID_SelectedIndexChanged;
             
             txtReceived.GotFocus += txtReceived_GotFocus;
             txtReceived.LostFocus += txtReceived_LostFocus;            
@@ -78,15 +76,83 @@ namespace Mart
             dgvSale.MouseClick += dgvSale_MouseClick;
         }
 
+        void cboImportID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            int importID = 0;
+            int.TryParse(cboImportID.SelectedValue.ToString(),out importID);
+            if(importID == 0 || cboImportID.SelectedIndex == -1) return;
+
+            SqlDataReader reader = null;
+            productList = new List<SellProduct>();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd = new SqlCommand("GetProductList", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@impID",importID);                
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    productList.Add(new SellProduct(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToDouble(reader[2])));
+                }                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load to Combobox");
+            }
+            finally
+            {
+                try
+                {
+                    reader.Close();
+                    cmd.Dispose();                   
+                    con.Close();
+                }
+                catch (NullReferenceException ex)
+                {
+                    MessageBox.Show(ex.Message,"Dispose Load Product TO ComboBox");
+                }
+            }
+
+            cboProductName.DataSource = null;
+            cboProductName.Items.Clear();
+            cboProductName.DataSource = productList;
+            cboProductName.ValueMember = "ProductID";
+            cboProductName.DisplayMember = "ProductName";
+            if (cboProductName.Items.Count > 0){          
+                EnableControls(true);
+                cboProductName.SelectedIndex = -1;
+                txtPrice.Clear();
+            }
+            else
+            {
+                EnableControls(false);
+                DoClick(btnReset,null);
+            }
+            btnAdd.Enabled = false;
+        }
+
+        private void EnableControls(bool ena)
+        {
+            cboProductName.Enabled = ena;
+            txtQty.Enabled = ena;
+            txtPrice.Enabled = ena;
+            txtDiscount.Enabled = ena;
+            txtTax.Enabled = ena;
+        }
+
         void dgvSale_MouseClick(object sender, MouseEventArgs e)
         {
             if (dgvSale.Rows.Count == 0) return;
             int index = dgvSale.CurrentRow.Index;
-            txtQty.Text = dgvSale.Rows[index].Cells[3].Value.ToString();
-            cboProductName.SelectedValue = int.Parse(dgvSale.Rows[index].Cells[1].Value.ToString());
-            txtPrice.Text = dgvSale.Rows[index].Cells[4].Value.ToString();
-            txtDiscount.Text = dgvSale.Rows[index].Cells[5].Value.ToString();
-            txtTax.Text = dgvSale.Rows[index].Cells[6].Value.ToString();            
+            txtQty.Text = dgvSale.Rows[index].Cells[4].Value.ToString();
+            cboProductName.SelectedValue = int.Parse(dgvSale.Rows[index].Cells[2].Value.ToString());
+            txtPrice.Text = dgvSale.Rows[index].Cells[5].Value.ToString();
+            txtDiscount.Text = dgvSale.Rows[index].Cells[6].Value.ToString();
+            txtTax.Text = dgvSale.Rows[index].Cells[7].Value.ToString();            
             dgvSelected = true;
             btnRemove.Enabled = true;
             btnAdd.Enabled = false;
@@ -106,7 +172,7 @@ namespace Mart
             float dis = 0;
             float.TryParse(txtDiscount.Text.Trim(),out dis);
 
-            if (int.Parse(dgvSale.Rows[index].Cells[3].Value.ToString()) != qty || int.Parse(dgvSale.Rows[index].Cells[5].Value.ToString()) != dis || int.Parse(dgvSale.Rows[index].Cells[6].Value.ToString()) != tax)
+            if (int.Parse(dgvSale.Rows[index].Cells[4].Value.ToString()) != qty || int.Parse(dgvSale.Rows[index].Cells[6].Value.ToString()) != dis || int.Parse(dgvSale.Rows[index].Cells[7].Value.ToString()) != tax)
             {
                 textBoxChanged = true;
                 btnUpdate.Enabled = true;
@@ -130,14 +196,14 @@ namespace Mart
             }
 
             dgvSale.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvSale.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvSale.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvSale.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvSale.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvSale.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvSale.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvSale.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvSale.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvSale.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            dgvSale.Columns[4].DefaultCellStyle.Format = "#,###,##0.00 R"; /*Column Price*/
-            dgvSale.Columns[7].DefaultCellStyle.Format = "#,###,##0.00 R"; /*Column Amount*/          
+            dgvSale.Columns[5].DefaultCellStyle.Format = "#,###,##0.00 R"; /*Column Price*/
+            dgvSale.Columns[8].DefaultCellStyle.Format = "#,###,##0.00 R"; /*Column Amount*/          
         }       
 
         void txtReceived_GotFocus(object sender, EventArgs e)
@@ -172,29 +238,20 @@ namespace Mart
             btnSell.Enabled = true;
         }
 
-        void txtQty_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                //SelectProductForSale();
-            }
-        }
-
-        void txtQty_LostFocus(object sender, EventArgs e)
-        {
-            SelectProductForSale();
-        }
-
         void cboProductName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboProductName.SelectedIndex == -1) return;
             int.TryParse(cboProductName.SelectedValue.ToString(), out proID);
+            if (proID == 0) return;
+
+            txtPrice.Text = productList[cboProductName.SelectedIndex].Price.ToString(); 
 
             #region /*To check if data is update when user click on DataGridView rows => Enable UPDATE button*/
+
             if (dgvSelected && dgvSale.Rows.Count > 0)
             {
                 int index = dgvSale.CurrentRow.Index;
-                if (int.Parse(cboProductName.SelectedValue.ToString()) != int.Parse(dgvSale.Rows[index].Cells[1].Value.ToString()))
+                if (int.Parse(cboProductName.SelectedValue.ToString()) != int.Parse(dgvSale.Rows[index].Cells[2].Value.ToString()) || int.Parse(cboImportID.SelectedValue.ToString()) != int.Parse(dgvSale.Rows[index].Cells[1].Value.ToString()))
                 {
                     comboBoxChanged = true;
                     btnUpdate.Enabled = true;
@@ -212,27 +269,18 @@ namespace Mart
             #endregion
             else
             {
-                if (cboProductName.SelectedIndex == -1 || proID == 0)
-                {
-                    btnAdd.Enabled = false;
-                    txtQty.Enabled = false;
-                    return;
-                }
-                else
-                {
-                    btnAdd.Enabled = true;
-                    txtQty.Enabled = true;
-                    SelectProductForSale();
-                }
+                btnAdd.Enabled = true;                
             }            
         }
 
-        private void SelectProductForSale()
+        private bool CheckProductForSale()
         {
-            int productNumber = 0;
+            bool has = false;
+            int productNumber = 0, importID = 0;
             int qty = 0;
             int.TryParse(txtQty.Text.Trim(),out qty);
             qty = (qty == 0) ? 1 : qty;
+            int.TryParse(cboImportID.SelectedValue.ToString(),out importID);           
 
             try
             {
@@ -241,25 +289,39 @@ namespace Mart
 
                 cmd = new SqlCommand("CheckIsProductExists", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@proID",proID);               
+                cmd.Parameters.AddWithValue("@proID",proID);
+                cmd.Parameters.AddWithValue("@impID",importID);
                 productNumber = Convert.ToInt32(cmd.ExecuteScalar());
+
+                /*To substract Product Number in DataGridView (Add The Product Number before check in Database Table)*/
+                foreach (DataGridViewRow row in dgvSale.Rows)
+                {
+                    if (dgvSelected && row.Index != dgvSale.CurrentRow.Index)
+                    {
+                        /*If user click any row to update data , we wont add include the Quantity of selected row */
+                        continue;
+                    }
+
+                    if (int.Parse(row.Cells[1].Value.ToString()) == importID && int.Parse(row.Cells[2].Value.ToString()) == proID)
+                    {
+                        productNumber -= int.Parse(row.Cells[4].Value.ToString());
+                    }
+                }
+
                 if (productNumber == 0)
                 {
-                    MessageBox.Show("This product is not exist","Sale");
-                    txtPrice.Clear();
-                    txtQty.Clear();
-                    btnAdd.Enabled = false;
+                    MessageBox.Show("This product is not exist","Sale");                   
+                    txtQty.Clear();               
+                    has = false;
                 }
-                else if (productNumber < qty)
+                else if (productNumber < qty && productNumber >= 0)
                 {
-                    MessageBox.Show(string.Format("We have {0} only {1} items in our Mart",cboProductName.Text,productNumber), "Sale");
-                    txtPrice.Clear();
-                    btnAdd.Enabled = false;
+                    MessageBox.Show(string.Format("We have {0} only {1} items in our Mart",cboProductName.Text,productNumber), "Sale");                                    
+                    has = false;
                 }
                 else
                 {
-                    btnAdd.Enabled = true;
-                    txtPrice.Text = productList[cboProductName.SelectedIndex].Price.ToString();                   
+                    has = true;                                              
                 }                
             }
             catch (Exception ex)
@@ -274,47 +336,17 @@ namespace Mart
                     con.Close();
                 }
                 catch (NullReferenceException)
-                {                  
-                }                
-            }           
+                {
+            
+                }             
+            }
+            return has;
         }
 
-        private void LoadProductToCombobox()
+        private void LoadDataToCombobox()
         {
-            SqlDataReader reader = null;
-            productList = new List<SellProduct>();
-            try
-            {
-                if (con.State == ConnectionState.Closed)               
-                    con.Open();
-                cmd = new SqlCommand("GetProductList",con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                reader = cmd.ExecuteReader();
-                while(reader.Read()){
-                    productList.Add(new SellProduct(Convert.ToInt32(reader[0]),Convert.ToString(reader[1]),Convert.ToDouble(reader[2])));
-                }
-                cboProductName.DataSource = productList;                
-                cboProductName.ValueMember = "ProductID";
-                cboProductName.DisplayMember = "ProductName";
-                if(cboProductName.Items.Count > 0)
-                    cboProductName.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message,"Load to Combobox");
-            }
-            finally
-            {
-                try
-                {
-                    cmd.Dispose();
-                    reader.Close();
-                    con.Close();
-                }
-                catch (NullReferenceException)
-                {                  
-                }
-            }
+            Controller.FillComboBoxValue(cboImportID, "impID", "impID", "SelectAllImportID");
+            cboImportID.SelectedIndex = 0;
         }       
 
         private void DoPress(object sender, KeyPressEventArgs e)
@@ -326,20 +358,20 @@ namespace Mart
         {
             if (sender == btnAdd)
             {
-                btnRemove.Enabled = true;
-               
+                if (!CheckProductForSale()) return;
+
                 double _amount = 0;
                 int _currentNumber = dgvSale.Rows.Count + 1;
                 string _name = cboProductName.Text.Trim();
 
-                int _qty = 0;
+                int _qty = 0, importID = 0;
+                int.TryParse(cboImportID.SelectedValue.ToString(),out importID);
                 int.TryParse(txtQty.Text.Trim(),out _qty);
                 _qty = (_qty == 0) ? 1 : _qty;
 
-                float _price = float.Parse(txtPrice.Text.Trim());               
-                float _discount = 0f;
+                float _price = 0f, _discount = 0f, _tax = 0f;
+                float.TryParse(txtPrice.Text.Trim(), out _price);                              
                 float.TryParse(txtDiscount.Text.ToString(), out _discount);
-                float _tax = 0f;
                 float.TryParse(txtTax.Text.ToString(), out _tax);               
                 
                 float subTotal = _qty * _price;
@@ -348,35 +380,36 @@ namespace Mart
 
                 _amount =  subTotal - totalDiscount + totalTax;
 
-                dgvSale.Rows.Add(_currentNumber, proID, _name, _qty, _price, _discount, _tax, _amount);
+                dgvSale.Rows.Add(_currentNumber, importID, proID, _name, _qty, _price, _discount, _tax, _amount);
 
                 RefreshTotal();
+                btnRemove.Enabled = true;
             }
             else if (sender == btnUpdate)
             {
-                if (dgvSale.Rows.Count == 0) return;                
+                if (dgvSale.Rows.Count == 0 || !CheckProductForSale()) return;                
                 int index = dgvSale.CurrentRow.Index;
 
                 double _amount = 0;
                 int _currentNumber = int.Parse(dgvSale.Rows[index].Cells[0].Value.ToString());
                 string _proName = cboProductName.Text.Trim();
 
-                int _qty = 0;
+                int _qty = 0, importID = 0;
+                int.TryParse(cboImportID.SelectedValue.ToString(), out importID); 
                 int.TryParse(txtQty.Text.Trim(), out _qty);
                 _qty = (_qty == 0) ? 1 : _qty;
 
-                float _price = float.Parse(txtPrice.Text.Trim());
-                float _discount = 0f;
+                float _price = 0f, _discount = 0f, _tax = 0f;
+                float.TryParse(txtPrice.Text.Trim(), out _price);
                 float.TryParse(txtDiscount.Text.ToString(), out _discount);
-                float _tax = 0f;
-                float.TryParse(txtTax.Text.ToString(), out _tax);
+                float.TryParse(txtTax.Text.ToString(), out _tax); 
 
                 float subTotal = _qty * _price;
                 float totalDiscount = subTotal * _discount / 100;
                 float totalTax = subTotal * _tax / 100;
 
                 _amount = subTotal - totalDiscount + totalTax;                
-                dgvSale.Rows[index].SetValues(_currentNumber, proID, _proName, _qty, _price, _discount, _tax, _amount);
+                dgvSale.Rows[index].SetValues(_currentNumber, importID, proID, _proName, _qty, _price, _discount, _tax, _amount);
                 
                 ResetControls();
                 RefreshTotal();
@@ -411,6 +444,7 @@ namespace Mart
                         }
                         ResetControls();
                         RefreshTotal();
+                        btnReset.Visible = false;
                     }
                 }
             }
@@ -453,12 +487,12 @@ namespace Mart
                         DataRow newRow = dtSoldDetail.NewRow();
                         newRow["soldID"] = lastSoldID;
                         /*Product ID is hidden in DataGridView*/
-                        newRow["proID"] = int.Parse(row.Cells[1].Value.ToString().Trim());
-                        newRow["qty"] = int.Parse(row.Cells[3].Value.ToString().Trim());
-                        newRow["price"] = float.Parse(row.Cells[4].Value.ToString().Trim());
-                        newRow["discount"] = float.Parse(row.Cells[5].Value.ToString().Trim());
-                        newRow["tax"] = float.Parse(row.Cells[6].Value.ToString().Trim());
-                        newRow["amount"] = double.Parse(row.Cells[7].Value.ToString().Trim());
+                        newRow["proID"] = int.Parse(row.Cells[2].Value.ToString().Trim());
+                        newRow["qty"] = int.Parse(row.Cells[4].Value.ToString().Trim());
+                        newRow["price"] = float.Parse(row.Cells[5].Value.ToString().Trim());
+                        newRow["discount"] = float.Parse(row.Cells[6].Value.ToString().Trim());
+                        newRow["tax"] = float.Parse(row.Cells[7].Value.ToString().Trim());
+                        newRow["amount"] = double.Parse(row.Cells[8].Value.ToString().Trim());
                         dtSoldDetail.Rows.Add(newRow);
                     }
 
@@ -548,8 +582,7 @@ namespace Mart
             txtDiscount.Clear();
             txtTax.Clear();
 
-            btnSell.Enabled = false;
-            btnAdd.Enabled = false;
+            btnSell.Enabled = false;          
             btnRemove.Enabled = false;
             btnUpdate.Enabled = false;
         }
@@ -638,36 +671,6 @@ namespace Mart
         public DialogResult MessageVerify(string des, string title)
         {
             return MessageBox.Show(des, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-        }
-
-        public void LoadData()
-        {
-            //throw new NotImplementedException();
-        }
-
-        public bool Insert(sold obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(sold obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void date_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
