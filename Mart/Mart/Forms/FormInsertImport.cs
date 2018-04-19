@@ -81,7 +81,7 @@ namespace Mart.Forms
 
         void lblAddProduct_Click(object sender, EventArgs e)
         {
-            frmProductDetails frmAdd = new frmProductDetails(1, 0);
+            FormProductDetails frmAdd = new FormProductDetails(1, 0);
             frmAdd.Created += frmAdd_Created;
             frmAdd.ShowDialog();   
         }
