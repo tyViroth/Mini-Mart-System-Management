@@ -16,99 +16,146 @@ namespace Mart.Forms
     {
         private DataTable dt = null;
         private SqlCommand cmdImp, cmdImpDatial;
-        private SqlConnection con = Connection.getConnection();
-        private List<ImportDetail> impDetails = new List<ImportDetail>();
-        double totalAmount = 0;
+        private SqlConnection con = Connection.getConnection();  
         public frmInsertImport()
         {
             InitializeComponent();
             CreateTable();
-          
-            btnAdd.Click += BtnAdd_Click;
-            btnCancel.Click += BtnCancel_Click;
-            btnClose.Click += BtnClose_Click;
-            btnRemove.Click += BtnRemove_Click;
-            btnSave.Click += BtnSave_Click;
-            btnReset.Click += BtnReset_Click;
-            this.Load += FrmInsertImport_Load;
-            txtImpPrice.KeyPress += AllowNumberOnly;
-            txtImpQty.KeyPress += AllowNumberOnly;
-            txtUnitPrice.KeyPress += AllowNumberOnly;
+            ControlDataGridView();
+            RegisterEvent();
             
         }
 
-        private void BtnUpdate_Click(object sender, EventArgs e)
+        private void ControlDataGridView()
         {
-            bool sucess = false;
-            int impID;
-            try
+            foreach (DataGridViewColumn col in dgvImportDetail.Columns)
             {
-                con.Open();
-                cmdImp = new SqlCommand("Update Import set impDate = @impDate, supId = @supID, impTotal = @impTotal", con);
-                cmdImp.Parameters.AddWithValue("@impDate", dTPImpDate.Value);
-                cmdImp.Parameters.AddWithValue("@supID", (int)cboSupplier.SelectedValue);
-                double totalImport = 0;
-                double.TryParse(txtAmount.Text, out totalImport);
-                cmdImp.Parameters.AddWithValue("@impTotal", totalImport);
-
-                if (cmdImp.ExecuteNonQuery() > 0)
-                {
-                    sucess = true;
-                }
-            }
-            catch (SqlException ex)
-            {
-                sucess = false;
-                MessageBox.Show("There was an error hapend! :" + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-                cmdImp.Dispose();
+                Controller.AlignHeaderTextCenter(col);
             }
 
-            impID = Controller.GetLastAutoIncrement("Import");
-            bool saveImportSuccess = SaveImprotDetail(impID);
-
-            cmdImpDatial = new SqlCommand("DELETE ImportDetail WHERE impID = @impID", con);
-            cmdImpDatial.Parameters.AddWithValue("@impID", impID);
-            cmdImpDatial.ExecuteNonQuery();
-
-            if (saveImportSuccess && sucess)
+            for (int i = 1; i < dgvImportDetail.Columns.Count; i++)
             {
-                MessageBox.Show("Updated suceessfully!");
-                btnSave.Enabled = false;
-            }
-            else
-            {
-                try
-                {
-                    if (sucess)
-                    {
-                        cmdImp = new SqlCommand("DELETE Import WHERE impID = @impID", con);
-                        cmdImp.Parameters.AddWithValue("@impID", impID);
-                        cmdImpDatial = new SqlCommand("DELETE ImportDetail WHERE impID = @impID", con);
-                        cmdImpDatial.Parameters.AddWithValue("@impID", impID);
-                        cmdImp.ExecuteNonQuery();
-                        cmdImpDatial.ExecuteNonQuery();
-                    }
-                    MessageBox.Show("Updated unsuceessfully!");
-                }
-                catch (SqlException ex)
-                {
-
-                }
+                dgvImportDetail.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;   
             }
 
+            Controller.NonSortableDataGridView(dgvImportDetail);
         }
 
-        private void BtnReset_Click(object sender, EventArgs e)
+        private void RegisterEvent()
         {
-            dTPImpDate.Text = null;
-            cboSupplier.Text = null;
-            ClearTextBox();
-            dgvImpDetail.Rows.Clear();
-            btnSave.Enabled = true;
+            lblAddProduct.Click += lblAddProduct_Click;
+            btnAdd.Click += buttonAdd_Click;
+            btnUpdate.Click += buttonUpdate_Click;
+            btnClose.Click += buttonClose_Click;
+            btnDelete.Click += buttonDelete_Click;
+            btnImport.Click += buttonSave_Click;
+            btnClear.Click += buttonClear_Click;
+            this.Load += FrmInsertImport_Load;
+            txtImportPrice.KeyPress += AllowNumberOnly;
+            txtImportQty.KeyPress += AllowNumberOnly;
+            txtSalePrice.KeyPress += AllowNumberOnly;
+
+            dgvImportDetail.Click += dgvImportDetail_Click;
+        }
+
+        void dgvImportDetail_Click(object sender, EventArgs e)
+        {
+            if (dgvImportDetail.Rows.Count > 0)
+            {
+                int index = dgvImportDetail.CurrentRow.Index;
+                cboProduct.SelectedValue = int.Parse(dgvImportDetail.Rows[index].Cells[5].Value.ToString());
+                txtImportQty.Text = dgvImportDetail.Rows[index].Cells[1].Value.ToString();
+                txtImportPrice.Text = dgvImportDetail.Rows[index].Cells[2].Value.ToString();
+                txtSalePrice.Text = dgvImportDetail.Rows[index].Cells[3].Value.ToString();
+                cboProduct.Enabled = false;
+                EnableButton(true);
+                btnAdd.Enabled = false;
+            }
+        }
+
+        private void EnableButton(bool ena)
+        {
+            btnDelete.Enabled = ena;
+            btnUpdate.Enabled = ena;
+        }
+
+        void lblAddProduct_Click(object sender, EventArgs e)
+        {
+            frmProductDetails frmAdd = new frmProductDetails(1, 0);
+            frmAdd.Created += frmAdd_Created;
+            frmAdd.ShowDialog();   
+        }
+
+        private void frmAdd_Created()
+        {
+            LoadProductIntoComboBox();
+        }     
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            int proId = 0;
+            int.TryParse(cboProduct.SelectedValue.ToString(), out proId);
+            string productName = cboProduct.Text.ToString();
+
+            float importPrice = 0;
+            float.TryParse(txtImportPrice.Text, out importPrice);
+
+            int importQty = 0;
+            int.TryParse(txtImportQty.Text, out importQty);
+
+            double subAmount = importPrice * importQty;
+
+            float salePrice = 0f;
+            float.TryParse(txtSalePrice.Text, out salePrice);
+
+            if (cboProduct.SelectedIndex == -1)
+            {
+                MessageBox.Show("There is no product selected!");
+            }
+            else if (txtImportQty.Text == "" || importQty <= 0)
+            {
+                MessageBox.Show("Please input quantity!");
+                txtImportQty.Focus();
+            }
+            else if (txtImportPrice.Text.Trim() == "" || importPrice <= 0)
+            {
+                MessageBox.Show("Please input import price!");
+                txtImportPrice.Focus();
+            }
+            else if (txtSalePrice.Text.Trim() == "" || salePrice <= 0)
+            {
+                MessageBox.Show("Pleas input sale price!");
+                txtSalePrice.Focus();
+            }
+            else
+            {            
+                dgvImportDetail.Rows[dgvImportDetail.CurrentRow.Index].SetValues(cboProduct.Text.ToString(), txtImportQty.Text.ToString(), txtImportPrice.Text.ToString(), txtSalePrice.Text.ToString(), subAmount.ToString(), proId.ToString());
+                RefreshTotal();
+                ClearControls();
+                MessageBox.Show("Product was updated successfully.","Update Product");
+            }              
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            ClearControls();
+            EnableButton(false);
+        }
+
+        private void ClearControls()
+        {
+            if (cboProduct.Items.Count > 0)
+            {
+                cboProduct.SelectedIndex = -1;
+            }
+            txtImportQty.Clear();
+            txtImportPrice.Clear();
+            txtSalePrice.Clear();       
+            btnImport.Enabled = true;
+            btnAdd.Enabled = true;
+            EnableButton(false);
+
+            cboProduct.Enabled = true;
         }
 
         private void AllowNumberOnly(object sender, KeyPressEventArgs e)
@@ -118,6 +165,35 @@ namespace Mart.Forms
 
         private void FrmInsertImport_Load(object sender, EventArgs e)
         {
+            LoadSupplierIntoComboBox();
+            LoadProductIntoComboBox();
+        }
+
+        private void LoadProductIntoComboBox()
+        {
+            try
+            {
+                SqlDataAdapter daPro = new SqlDataAdapter("select proName, proID from product", con);
+                DataTable dtPro = new DataTable();
+                daPro.Fill(dtPro);
+                cboProduct.DataSource = dtPro;
+                cboProduct.DisplayMember = "proName";
+                cboProduct.ValueMember = "proID";                  
+                btnImport.Enabled = true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message+" There was an error hapend!", "Load Product");
+            }
+            finally
+            {
+                con.Close();
+            }
+            if(cboProduct.Items.Count > 0) cboProduct.SelectedIndex = -1;
+        }
+
+        private void LoadSupplierIntoComboBox()
+        {
             try
             {
                 con.Open();
@@ -126,26 +202,17 @@ namespace Mart.Forms
                 daSup.Fill(dtSup);
                 cboSupplier.DataSource = dtSup;
                 cboSupplier.DisplayMember = "supName";
-                cboSupplier.ValueMember = "supID";
-
-                SqlDataAdapter daPro = new SqlDataAdapter("select proName, proID from product", con);
-                DataTable dtPro = new DataTable();
-                daPro.Fill(dtPro);
-                cboProduct.DataSource = dtPro;
-                cboProduct.DisplayMember = "proName";
-                cboProduct.ValueMember = "proID";
-                cboProduct.Text = null;
-                cboSupplier.Text = null;
-                btnSave.Enabled = true;
+                cboSupplier.ValueMember = "supID";                
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-                MessageBox.Show("There was an error hapend!");
+                MessageBox.Show(ex.Message + " There was an error hapend!", "Load Supplier");
             }
             finally
             {
                 con.Close();
             }
+            if (cboSupplier.Items.Count > 0) cboSupplier.SelectedIndex = -1;
         }
 
         private bool SaveImprotDetail(int impID)
@@ -153,9 +220,8 @@ namespace Mart.Forms
             bool success = false;
             int proId;
             double qty, price, amount, unitPrice;
-            string productName;
-            int successRow = 0;
-            foreach (DataGridViewRow Datarow in dgvImpDetail.Rows)
+            string productName;           
+            foreach (DataGridViewRow Datarow in dgvImportDetail.Rows)
             {
 
                 if (Datarow.Cells[0].Value != null && Datarow.Cells[1].Value != null && Datarow.Cells[2].Value != null && Datarow.Cells[3].Value != null && Datarow.Cells[4].Value != null && Datarow.Cells[5].Value != null)
@@ -174,6 +240,7 @@ namespace Mart.Forms
                     rw["impPrice"] = price;
                     rw["unitPrice"] = unitPrice;
                     rw["amount"] = amount;
+                    rw["soldQty"] = 0;
                     dt.Rows.Add(rw);
                 }
             }
@@ -211,39 +278,40 @@ namespace Mart.Forms
         }
         
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        private void buttonSave_Click(object sender, EventArgs e)
         {
 
             if (cboSupplier.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select supplier!");
             }
-            else if (dgvImpDetail.Rows.Count == 0)
+            else if (dgvImportDetail.Rows.Count == 0)
             {
                 MessageBox.Show("Please add product!");
             }
             else
             {
-                bool sucess = false;
+                bool success = false;
                 int impID;
                 try
                 {
                     con.Open();
-                    cmdImp = new SqlCommand("Insert into Import(impDate,supID,impTotal) Values(@impDate,@supplier,@impTotal)", con);
-                    cmdImp.Parameters.AddWithValue("@impDate", dTPImpDate.Value);
+                    cmdImp = new SqlCommand("Insert into Import(impDate,supID,empID,impTotal) Values(@impDate,@supplier,@empID,@impTotal)", con);
+                    cmdImp.Parameters.AddWithValue("@impDate", dtpImportDate.Value);
                     cmdImp.Parameters.AddWithValue("@supplier", (int)cboSupplier.SelectedValue);
+                    cmdImp.Parameters.AddWithValue("@empID",Program.empLogin.ID);
                     double totalImport = 0;
-                    double.TryParse(txtAmount.Text, out totalImport);
+                    double.TryParse(txtTotal.Text, out totalImport);
                     cmdImp.Parameters.AddWithValue("@impTotal", totalImport);
 
                     if (cmdImp.ExecuteNonQuery() > 0)
                     {
-                        sucess = true;
+                        success = true;
                     }
                 }
                 catch (SqlException ex)
                 {
-                    sucess = false;
+                    success = false;
                     MessageBox.Show("There was an error hapend! :" + ex.Message);
                 }
                 finally
@@ -254,16 +322,16 @@ namespace Mart.Forms
 
                 impID = Controller.GetLastAutoIncrement("Import");
                 bool saveImportSuccess = SaveImprotDetail(impID);
-                if (saveImportSuccess && sucess)
+                if (saveImportSuccess && success)
                 {
                     MessageBox.Show("Inserted suceessfully!");
-                    btnSave.Enabled = false;
+                    btnImport.Enabled = false;
                 }
                 else
                 {
                     try
                     {
-                        if (sucess)
+                        if (success)
                         {
                             cmdImp = new SqlCommand("DELETE Import WHERE impID = @impID", con);
                             cmdImp.Parameters.AddWithValue("@impID", impID);
@@ -276,69 +344,121 @@ namespace Mart.Forms
                     }
                     catch (SqlException ex)
                     {
-
                     }             
                 }
             }
         }
 
-        private void BtnRemove_Click(object sender, EventArgs e)
+        private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (dgvImpDetail.Rows.Count > 0)
+            if (dgvImportDetail.Rows.Count > 0)
             {
-                int i = dgvImpDetail.CurrentCell.RowIndex;
+                int i = dgvImportDetail.CurrentCell.RowIndex;
                 if (i >= 0)
-                dgvImpDetail.Rows.RemoveAt(i);
+                {
+                    dgvImportDetail.Rows.RemoveAt(i);
+                    RefreshTotal();
+                    ClearControls();
+                }                
+            } 
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you want to close? All Data will be lost !","Close",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
             }
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            int proId = 0;
+            int.TryParse(cboProduct.SelectedValue.ToString(), out proId);
+            string productName = cboProduct.Text.ToString();
+
+            float importPrice = 0;
+            float.TryParse(txtImportPrice.Text, out importPrice);
             
-        }
+            int importQty = 0;
+            int.TryParse(txtImportQty.Text, out importQty);
+            
+            double subAmount = importPrice * importQty;
+            
+            float salePrice = 0f;
+            float.TryParse(txtSalePrice.Text,out salePrice);
 
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            dTPImpDate.Text = null;
-            cboSupplier.Text = null;
-            ClearTextBox();
-            dgvImpDetail.Rows.Clear();
-        }
-
-        private void BtnAdd_Click(object sender, EventArgs e)
-        {
             if (cboProduct.SelectedIndex == -1)
             {
-                MessageBox.Show("There is no prouct selected!");
-            } else if (txtImpQty.Text == "")
+                MessageBox.Show("There is no product selected!");
+            } else if (txtImportQty.Text == "" || importQty <= 0)
             {
                 MessageBox.Show("Please input quantity!");
-                txtImpQty.Focus();
-            } else if (txtImpPrice.Text.Trim() == "")
+                txtImportQty.Focus();
+            } else if (txtImportPrice.Text.Trim() == "" || importPrice <= 0)
             {
                 MessageBox.Show("Please input import price!");
-                txtImpPrice.Focus();
-            } else if (txtUnitPrice.Text.Trim() == "")
+                txtImportPrice.Focus();
+            } else if (txtSalePrice.Text.Trim() == "" || salePrice <= 0)
             {
-                MessageBox.Show("Pleas input unit price!");
-                txtUnitPrice.Focus();
-            } else {
-                string productName = cboProduct.Text.ToString();
-                double price = 0;
-                Double.TryParse(txtImpPrice.Text, out price);
-                int qty = 0;
-                int.TryParse(txtImpQty.Text, out qty);
-                Double amount = price * qty;
-                int proId = 0;
-                int.TryParse(cboProduct.SelectedValue.ToString(), out proId);
+                MessageBox.Show("Pleas input sale price!");
+                txtSalePrice.Focus();
+            } else {                                           
 
-                string[] row = { cboProduct.Text.ToString(), txtImpPrice.Text.ToString(), txtImpPrice.Text.ToString(), txtUnitPrice.Text.ToString(), amount.ToString(), proId.ToString() };
-                totalAmount += amount;
-                dgvImpDetail.Rows.Add(row);
-                txtAmount.Text = totalAmount.ToString();
-                ClearTextBox();
+                DialogResult result;
+                bool exist = false;
+                foreach (DataGridViewRow row in dgvImportDetail.Rows)
+                {
+                    if (int.Parse(row.Cells[5].Value.ToString()) == int.Parse(cboProduct.SelectedValue.ToString()))
+                    {
+                        exist = true;
+                        int index = row.Index;
+                        dgvImportDetail.CurrentRow.Selected = false;
+                        dgvImportDetail.Rows[index].Selected = true;   
+                        result =  MessageBox.Show("This Product ID is already exist! Do you want to override?", "Exist Product", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (result == DialogResult.Yes)
+                        {                          
+                            dgvImportDetail.Rows[index].SetValues(cboProduct.Text.ToString(), txtImportQty.Text.ToString(), txtImportPrice.Text.ToString(), txtSalePrice.Text.ToString(), subAmount.ToString(), proId.ToString());
+                            RefreshTotal();
+                            ClearControls();
+                            break;
+                        }                        
+                    }                    
+                }
+                if (!exist)
+                {
+                    dgvImportDetail.Rows.Add(cboProduct.Text.ToString(), txtImportQty.Text.ToString(), txtImportPrice.Text.ToString(), txtSalePrice.Text.ToString(), subAmount.ToString(), proId.ToString());
+                    RefreshTotal();
+                    ClearControls();
+                }               
             }  
+        }
+
+        private bool CheckExistProduct()
+        {
+            bool exist = false;
+            if (cboProduct.SelectedIndex == -1) return false;
+            foreach (DataGridViewRow row in dgvImportDetail.Rows)
+            {
+                if (int.Parse(row.Cells[5].Value.ToString()) == int.Parse(cboProduct.SelectedValue.ToString()))
+                {
+                    MessageBox.Show("This Product ID is already exist! Do you want to override?","Exist Product",MessageBoxButtons.YesNo,MessageBoxIcon.Question);    
+                }
+            }
+
+            return exist;
+        }
+
+        private void RefreshTotal()
+        {
+            double total = 0;
+            foreach (DataGridViewRow row in dgvImportDetail.Rows)
+            {
+                total += double.Parse(row.Cells[4].Value.ToString());
+            }
+            txtTotal.Text = string.Format("{0:N2}",total);
+            txtTotalRow.Text = dgvImportDetail.Rows.Count.ToString();
         }
 
         private void CreateTable()
@@ -351,14 +471,6 @@ namespace Mart.Forms
             dt.Columns.Add("unitPrice", typeof(double));
             dt.Columns.Add("amount", typeof(double));
             dt.Columns.Add("soldQty", typeof(int));
-        }
-       
-        private void ClearTextBox()
-        {
-            txtImpQty.Text = null;
-            txtImpPrice.Text = null;
-            txtUnitPrice.Text = null;
-            txtAmount.Text = null;
-        }
+        }       
     }
 }

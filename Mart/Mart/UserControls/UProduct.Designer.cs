@@ -45,6 +45,7 @@
             this.btnDetails = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnCategory = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.panelControlContainer.SuspendLayout();
             this.panelButton.SuspendLayout();
             this.panelListContainer.SuspendLayout();
@@ -62,7 +63,7 @@
             this.panelControlContainer.Controls.Add(this.panelButton);
             this.panelControlContainer.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControlContainer.Location = new System.Drawing.Point(0, 0);
-            this.panelControlContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelControlContainer.Margin = new System.Windows.Forms.Padding(2);
             this.panelControlContainer.Name = "panelControlContainer";
             this.panelControlContainer.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.panelControlContainer.Size = new System.Drawing.Size(909, 71);
@@ -77,7 +78,7 @@
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnSearch.Location = new System.Drawing.Point(205, 26);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(53, 21);
             this.btnSearch.TabIndex = 6;
@@ -88,7 +89,7 @@
             // 
             this.cboFilter.FormattingEnabled = true;
             this.cboFilter.Location = new System.Drawing.Point(317, 27);
-            this.cboFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboFilter.Margin = new System.Windows.Forms.Padding(2);
             this.cboFilter.Name = "cboFilter";
             this.cboFilter.Size = new System.Drawing.Size(80, 21);
             this.cboFilter.TabIndex = 4;
@@ -109,7 +110,7 @@
             // 
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSearch.Location = new System.Drawing.Point(23, 30);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(149, 13);
             this.txtSearch.TabIndex = 2;
@@ -119,22 +120,23 @@
             // 
             this.cboTypeSearch.FormattingEnabled = true;
             this.cboTypeSearch.Location = new System.Drawing.Point(20, 27);
-            this.cboTypeSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboTypeSearch.Margin = new System.Windows.Forms.Padding(2);
             this.cboTypeSearch.Name = "cboTypeSearch";
             this.cboTypeSearch.Size = new System.Drawing.Size(179, 21);
             this.cboTypeSearch.TabIndex = 1;
             // 
             // panelButton
             // 
+            this.panelButton.Controls.Add(this.btnAdd);
             this.panelButton.Controls.Add(this.btnRefresh);
             this.panelButton.Controls.Add(this.btnDetails);
             this.panelButton.Controls.Add(this.btnUpdate);
             this.panelButton.Controls.Add(this.btnCategory);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelButton.Location = new System.Drawing.Point(566, 0);
-            this.panelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelButton.Location = new System.Drawing.Point(465, 0);
+            this.panelButton.Margin = new System.Windows.Forms.Padding(2);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(323, 71);
+            this.panelButton.Size = new System.Drawing.Size(424, 71);
             this.panelButton.TabIndex = 0;
             // 
             // panelListContainer
@@ -143,7 +145,7 @@
             this.panelListContainer.Controls.Add(this.dgvProduct);
             this.panelListContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelListContainer.Location = new System.Drawing.Point(0, 71);
-            this.panelListContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelListContainer.Margin = new System.Windows.Forms.Padding(2);
             this.panelListContainer.Name = "panelListContainer";
             this.panelListContainer.Padding = new System.Windows.Forms.Padding(20, 0, 20, 13);
             this.panelListContainer.Size = new System.Drawing.Size(909, 306);
@@ -202,7 +204,7 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnRefresh.Location = new System.Drawing.Point(0, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(11, 0);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(78, 67);
@@ -221,7 +223,7 @@
             this.btnDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDetails.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnDetails.Location = new System.Drawing.Point(79, 2);
+            this.btnDetails.Location = new System.Drawing.Point(177, 0);
             this.btnDetails.Margin = new System.Windows.Forms.Padding(2);
             this.btnDetails.Name = "btnDetails";
             this.btnDetails.Size = new System.Drawing.Size(78, 67);
@@ -240,7 +242,7 @@
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnUpdate.Location = new System.Drawing.Point(161, 3);
+            this.btnUpdate.Location = new System.Drawing.Point(260, 0);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(78, 67);
@@ -259,7 +261,7 @@
             this.btnCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCategory.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnCategory.Location = new System.Drawing.Point(244, 3);
+            this.btnCategory.Location = new System.Drawing.Point(343, 0);
             this.btnCategory.Margin = new System.Windows.Forms.Padding(2);
             this.btnCategory.Name = "btnCategory";
             this.btnCategory.Size = new System.Drawing.Size(78, 67);
@@ -268,6 +270,25 @@
             this.btnCategory.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnCategory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCategory.UseVisualStyleBackColor = true;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
+            this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnAdd.Location = new System.Drawing.Point(94, 0);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(78, 67);
+            this.btnAdd.TabIndex = 4;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.UseVisualStyleBackColor = true;
             // 
             // UProduct
             // 
@@ -308,6 +329,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel txtTotalItem;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnAdd;
 
 
     }

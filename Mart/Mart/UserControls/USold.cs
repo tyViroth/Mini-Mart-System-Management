@@ -23,7 +23,7 @@ namespace Mart
         public SqlCommand cmd = null;
         public SqlConnection con = Connection.getConnection();
         private static USold _instance;
-        private DataTable dtSoldDetail;
+        private DataTable dataTableSoldDetail;
 
         private bool textBoxChanged = false;
         private bool comboBoxChanged = false;
@@ -43,9 +43,19 @@ namespace Mart
         public USold()
         {
             InitializeComponent();
-            EventRegister();                                           
-            LoadDataToCombobox();
+            EventRegister();            
             ControllDataGrid();
+            Controller.FillComboBoxValue(cboImportID, "impID", "impID", "SelectAllImportID");
+            if (cboImportID.Items.Count > 0)
+            {
+                cboImportID.SelectedIndex = cboImportID.Items.Count - 1;
+                btnAdd.Enabled = true;
+            }
+            else
+            {
+                EnableControls(false);
+                btnAdd.Enabled = false;
+            }                
         }
 
         private void EventRegister()
@@ -66,10 +76,10 @@ namespace Mart
             txtQty.TextChanged += DoTextChange;
             txtDiscount.TextChanged += DoTextChange;
             txtTax.TextChanged += DoTextChange;              
-
-            cboProductName.SelectedIndexChanged += cboProductName_SelectedIndexChanged;
-            cboImportID.SelectedIndexChanged += cboImportID_SelectedIndexChanged;
             
+            cboImportID.SelectedIndexChanged += cboImportID_SelectedIndexChanged;
+            cboProductName.SelectedIndexChanged += cboProductName_SelectedIndexChanged;
+
             txtReceived.GotFocus += txtReceived_GotFocus;
             txtReceived.LostFocus += txtReceived_LostFocus;            
 
@@ -78,7 +88,6 @@ namespace Mart
 
         void cboImportID_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             int importID = 0;
             int.TryParse(cboImportID.SelectedValue.ToString(),out importID);
             if(importID == 0 || cboImportID.SelectedIndex == -1) return;
@@ -91,7 +100,7 @@ namespace Mart
                     con.Open();
                 cmd = new SqlCommand("GetProductList", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@impID",importID);                
+                cmd.Parameters.AddWithValue("@impID",importID);          
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -149,6 +158,7 @@ namespace Mart
             if (dgvSale.Rows.Count == 0) return;
             int index = dgvSale.CurrentRow.Index;
             txtQty.Text = dgvSale.Rows[index].Cells[4].Value.ToString();
+            cboImportID.SelectedValue = int.Parse(dgvSale.Rows[index].Cells[1].Value.ToString());            
             cboProductName.SelectedValue = int.Parse(dgvSale.Rows[index].Cells[2].Value.ToString());
             txtPrice.Text = dgvSale.Rows[index].Cells[5].Value.ToString();
             txtDiscount.Text = dgvSale.Rows[index].Cells[6].Value.ToString();
@@ -269,8 +279,8 @@ namespace Mart
             #endregion
             else
             {
-                btnAdd.Enabled = true;                
-            }            
+                btnAdd.Enabled = true;            
+            }
         }
 
         private bool CheckProductForSale()
@@ -338,16 +348,10 @@ namespace Mart
                 catch (NullReferenceException)
                 {
             
-                }             
+                }
             }
             return has;
         }
-
-        private void LoadDataToCombobox()
-        {
-            Controller.FillComboBoxValue(cboImportID, "impID", "impID", "SelectAllImportID");
-            cboImportID.SelectedIndex = 0;
-        }       
 
         private void DoPress(object sender, KeyPressEventArgs e)
         {
@@ -450,123 +454,133 @@ namespace Mart
             }
             else if (sender == btnCancel)
             {
-                if (dgvSale.Rows.Count !=0 )
+                DialogResult result = MessageVerify("Do you want to cancel sale?","Sale");
+                if (result == DialogResult.Yes)
                 {
-                    dgvSale.Rows.Clear();
-                    RefreshTotal();
-                }
+                    if (dgvSale.Rows.Count != 0)
+                    {
+                        dgvSale.Rows.Clear();
+                        RefreshTotal();
+                    }
 
-                if (dtSoldDetail != null)
-                {
-                    dtSoldDetail.Rows.Clear();
-                    dtSoldDetail.Dispose();
-                }
-                btnReset.Visible = false;
-                ResetControls();
+                    if (dataTableSoldDetail != null)
+                    {
+                        dataTableSoldDetail.Rows.Clear();
+                        dataTableSoldDetail.Dispose();
+                    }
+                    btnReset.Visible = false;
+                    btnAdd.Enabled = false;
+                    ResetControls();
+                }                
             }
             else if (sender == btnSell)
             {                
-                bool insertSold = InsertIntoSoldTable();
-                if (!insertSold)
-                {
-                    /*If Inserting into Sold Table is error we return*/
-                    MessageSuccess("Sale was saved unsuccessful", "Sell Product");
-                    return; 
-                }
-                
-                bool insertDetails = false;
+                 DialogResult verifyResult = MessageVerify("Click Yes to Sell?","Sale");
+                 if (verifyResult == DialogResult.Yes)
+                 {
+                     bool insertSold = InsertIntoSoldTable();
+                     if (!insertSold)
+                     {
+                         /*If Inserting into Sold Table is error we return*/
+                         MessageSuccess("Sale was saved unsuccessful", "Sell Product");
+                         return;
+                     }
 
-                CreateDataTable();
-                /*Load Data into DataTable*/
-                int lastSoldID = Controller.GetLastAutoIncrement("Sold");                
+                     bool insertDetails = false;
 
-                try
-                {
-                    foreach (DataGridViewRow row in dgvSale.Rows)
-                    {
-                        DataRow newRow = dtSoldDetail.NewRow();
-                        newRow["soldID"] = lastSoldID;
-                        /*Product ID is hidden in DataGridView*/
-                        newRow["proID"] = int.Parse(row.Cells[2].Value.ToString().Trim());
-                        newRow["qty"] = int.Parse(row.Cells[4].Value.ToString().Trim());
-                        newRow["price"] = float.Parse(row.Cells[5].Value.ToString().Trim());
-                        newRow["discount"] = float.Parse(row.Cells[6].Value.ToString().Trim());
-                        newRow["tax"] = float.Parse(row.Cells[7].Value.ToString().Trim());
-                        newRow["amount"] = double.Parse(row.Cells[8].Value.ToString().Trim());
-                        dtSoldDetail.Rows.Add(newRow);
-                    }
+                     CreateDataTable();
+                     /*Load Data into DataTable*/
+                     int lastSoldID = Controller.GetLastAutoIncrement("Sold");
 
-                    if(con.State == ConnectionState.Closed) 
-                    con.Open();
-                    cmd = new SqlCommand("InsertSoldDetail", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@SoldDetailType",dtSoldDetail);
-                    if (cmd.ExecuteNonQuery() > 0)
-                    {
-                        insertDetails = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    insertDetails = false;
-                    MessageError(ex.Message,"Sold Details");
-                }
-                finally
-                {
-                    try
-                    {
-                        con.Close();
-                        cmd.Dispose();
-                    }
-                    catch (NullReferenceException){}
-                }
+                     try
+                     {
+                         foreach (DataGridViewRow row in dgvSale.Rows)
+                         {
+                             DataRow newRow = dataTableSoldDetail.NewRow();
+                             newRow["soldID"] = lastSoldID;
+                             /*Product ID is hidden in DataGridView*/
+                             newRow["impID"] = int.Parse(row.Cells[1].Value.ToString().Trim());
+                             newRow["proID"] = int.Parse(row.Cells[2].Value.ToString().Trim());
+                             newRow["qty"] = int.Parse(row.Cells[4].Value.ToString().Trim());
+                             newRow["price"] = float.Parse(row.Cells[5].Value.ToString().Trim());
+                             newRow["discount"] = float.Parse(row.Cells[6].Value.ToString().Trim());
+                             newRow["tax"] = float.Parse(row.Cells[7].Value.ToString().Trim());
+                             newRow["amount"] = double.Parse(row.Cells[8].Value.ToString().Trim());
+                             dataTableSoldDetail.Rows.Add(newRow);
+                         }
 
-                /*Check if Insertion is error.*/
-                if (insertSold && insertDetails)
-                {
-                    MessageSuccess("Sale was saved successful", "Sell Product");
-                    btnSell.Enabled = false;                   
-                }
-                else if(!insertDetails) /*Insert into Sold Detail is error.*/
-                {
-                    #region /*We code to delete any records which has been inserted successfully into SOLD AND SOLDDETAIL table*/
+                         if (con.State == ConnectionState.Closed)
+                             con.Open();
+                         cmd = new SqlCommand("InsertSoldDetail", con);
+                         cmd.CommandType = CommandType.StoredProcedure;
+                         cmd.Parameters.AddWithValue("@SoldDetailType", dataTableSoldDetail);
+                         if (cmd.ExecuteNonQuery() > 0)
+                         {
+                             insertDetails = true;
+                         }
+                     }
+                     catch (Exception ex)
+                     {
+                         insertDetails = false;
+                         MessageError(ex.Message, "Sold Details");
+                     }
+                     finally
+                     {
+                         try
+                         {
+                             con.Close();
+                             cmd.Dispose();
+                         }
+                         catch (NullReferenceException) { }
+                     }
 
-                        SqlCommand cmdDeleteSold = null, cmdDeleteDetails = null ;
-                        try
-                        {
-                            if (con.State == ConnectionState.Closed)                  
-                            con.Open();
-                            cmdDeleteSold = new SqlCommand("delete from Sold where soldID = @soldID", con);
-                            cmdDeleteSold.CommandType = CommandType.Text;
-                            cmdDeleteSold.Parameters.AddWithValue("@soldID", lastSoldID);
-                            cmdDeleteSold.ExecuteNonQuery();
+                     /*Check if Insertion is error.*/
+                     if (insertSold && insertDetails)
+                     {
+                         MessageSuccess("Sale was saved successful", "Sell Product");
+                         btnSell.Enabled = false;
+                     }
+                     else if (!insertDetails) /*Insert into Sold Detail is error.*/
+                     {
+                         #region /*We code to delete any records which has been inserted successfully into SOLD AND SOLDDETAIL table*/
 
-                            cmdDeleteDetails = new SqlCommand("delete from SoldDetail where soldID = @soldID", con);
-                            cmdDeleteDetails.CommandType = CommandType.Text;
-                            cmdDeleteDetails.Parameters.AddWithValue("@soldID", lastSoldID);
-                            cmdDeleteDetails.ExecuteNonQuery();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageError(ex.Message,"Sell Product");
-                        }
-                        finally
-                        {
-                            try
-                            {
-                                con.Close();
-                                cmdDeleteSold.Dispose();
-                                cmdDeleteDetails.Dispose();
-                            }
-                            catch (NullReferenceException){ }
-                        }
-                        DialogResult result = MessageVerify("Sale was saved unsuccessful. Please click SELL again","Sell Product");
-                        if (result == DialogResult.Yes)
-                        {
-                            DoClick(btnSell,null);
-                        }
-                    #endregion
-                }
+                         SqlCommand cmdDeleteSold = null, cmdDeleteDetails = null;
+                         try
+                         {
+                             if (con.State == ConnectionState.Closed)
+                                 con.Open();
+                             cmdDeleteSold = new SqlCommand("delete from Sold where soldID = @soldID", con);
+                             cmdDeleteSold.CommandType = CommandType.Text;
+                             cmdDeleteSold.Parameters.AddWithValue("@soldID", lastSoldID);
+                             cmdDeleteSold.ExecuteNonQuery();
+
+                             cmdDeleteDetails = new SqlCommand("delete from SoldDetail where soldID = @soldID", con);
+                             cmdDeleteDetails.CommandType = CommandType.Text;
+                             cmdDeleteDetails.Parameters.AddWithValue("@soldID", lastSoldID);
+                             cmdDeleteDetails.ExecuteNonQuery();
+                         }
+                         catch (Exception ex)
+                         {
+                             MessageError(ex.Message, "Sell Product");
+                         }
+                         finally
+                         {
+                             try
+                             {
+                                 con.Close();
+                                 cmdDeleteSold.Dispose();
+                                 cmdDeleteDetails.Dispose();
+                             }
+                             catch (NullReferenceException) { }
+                         }
+                         DialogResult result = MessageVerify("Sale was saved unsuccessful. Please click SELL again", "Sell Product");
+                         if (result == DialogResult.Yes)
+                         {
+                             DoClick(btnSell, null);
+                         }
+                         #endregion
+                     }
+                 }                
             }               
         }
 
@@ -627,14 +641,15 @@ namespace Mart
        
         private void CreateDataTable()
         {
-            dtSoldDetail = new DataTable();
-            dtSoldDetail.Columns.Add("soldID",typeof(int));
-            dtSoldDetail.Columns.Add("proID", typeof(int));
-            dtSoldDetail.Columns.Add("qty", typeof(int));
-            dtSoldDetail.Columns.Add("price", typeof(float));
-            dtSoldDetail.Columns.Add("discount", typeof(float));
-            dtSoldDetail.Columns.Add("tax", typeof(float));
-            dtSoldDetail.Columns.Add("amount", typeof(double));
+            dataTableSoldDetail = new DataTable();
+            dataTableSoldDetail.Columns.Add("soldID",typeof(int));
+            dataTableSoldDetail.Columns.Add("impID", typeof(int));            
+            dataTableSoldDetail.Columns.Add("proID", typeof(int));
+            dataTableSoldDetail.Columns.Add("qty", typeof(int));
+            dataTableSoldDetail.Columns.Add("price", typeof(float));
+            dataTableSoldDetail.Columns.Add("discount", typeof(float));
+            dataTableSoldDetail.Columns.Add("tax", typeof(float));
+            dataTableSoldDetail.Columns.Add("amount", typeof(double));
         }
 
         private void RefreshTotal()

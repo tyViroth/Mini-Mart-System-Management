@@ -290,6 +290,9 @@
     <Compile Include="UserControls\USubSoldReport.Designer.cs">
       <DependentUpon>USubSoldReport.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\FormInsertImport.resx">
+      <DependentUpon>FormInsertImport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCategory.resx">
       <DependentUpon>frmCategory.cs</DependentUpon>
     </EmbeddedResource>
@@ -430,9 +433,16 @@
     <None Include="Resources\Connection_32.png" />
     <None Include="Resources\background connection.jpg" />
     <None Include="Resources\AddNew_32.png" />
+    <None Include="Resources\Add_20.png" />
+    <None Include="Resources\Cancel_32.png" />
+    <None Include="Resources\Clear_32.png" />
+    <None Include="Resources\Close_32.png" />
+    <None Include="Resources\Close_321.png" />
+    <None Include="Resources\Close_322.png" />
     <Content Include="Resources\delete.png" />
     <None Include="Resources\delete_32.png" />
     <Content Include="Resources\delete_48.png" />
+    <None Include="Resources\Edit_32.png" />
     <Content Include="Resources\edit_48.png" />
     <None Include="Resources\ic_search_black_36dp_1x.png" />
     <None Include="Resources\ic_mode_edit_black_48dp_1x.png" />
@@ -441,6 +451,8 @@
     <None Include="Resources\Excel_32.png" />
     <None Include="Resources\role_32.png" />
     <None Include="Resources\Sales_history_32.png" />
+    <None Include="Resources\Import_32.png" />
+    <None Include="Resources\Refresh_32.png" />
     <Content Include="Resources\search_36.png" />
     <None Include="Resources\collapse_48.png" />
     <None Include="Resources\Search_48.png" />

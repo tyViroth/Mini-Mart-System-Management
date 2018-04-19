@@ -48,7 +48,7 @@ namespace Mart
         }
         private void EventRegister()
         {
-          
+            btnAdd.Click += btnDoClick;
             btnDetails.Click += btnDoClick;
             btnSearch.Click += btnDoClick;
             btnUpdate.Click += btnDoClick;
@@ -144,6 +144,15 @@ namespace Mart
                     SetFooter();
                 }
             }
+            else if (sender == btnAdd)
+            {
+                if (index != 0)
+                {
+                    frmProductDetails frmAdd = new frmProductDetails(1, index);          
+                    frmAdd.Created += frmAdd_Created;
+                    frmAdd.ShowDialog();                    
+                }
+            }
             else if (sender == btnCategory)
             {
                 if (categoryForm == null)
@@ -184,6 +193,12 @@ namespace Mart
                 SetFooter();
             }
         }
+
+        void frmAdd_Created()
+        {
+            btnDoClick(btnRefresh, null);
+        }
+
         private bool UpdateDataRow()
         {
             bool success=false;

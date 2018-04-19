@@ -30,6 +30,10 @@ namespace Mart.Forms
         SqlCommand cmd;
         SqlDataReader reader;
         Product pro;
+        
+        public event CreatedHandler Created = null;
+        public delegate void CreatedHandler();
+
         #endregion
         public frmProductDetails(int state,int index)
         {
@@ -115,7 +119,17 @@ namespace Mart.Forms
                     if (Checkrequirement())
                     {
                         SuccesUpdate = InsertData();
-                        if (SuccesUpdate)this.Close();
+                        //if (SuccesUpdate)this.Close();
+                        if (SuccesUpdate)
+                        {
+                            if (Created != null)
+                            {
+                                /*Call back to Main Form*/
+                                MessageSuccess("Product was saved successfully.","Add Product");
+                                ClearControl();
+                                Created();
+                            }
+                        }
                     }
                 }
                 else if (needUpdate && update)
@@ -131,6 +145,17 @@ namespace Mart.Forms
                     this.Close();
                 }
             }
+        }
+
+        private void ClearControl()
+        {
+            txtProductName.Clear();
+            txtPrice.Clear();
+            txtType.Clear();
+            txtDescription.Clear();
+            txtProductID.Clear();
+            if(cboCategory.Items.Count > 0)
+                cboCategory.SelectedIndex = -1;
         }
         public byte[] ImageToByteArray(System.Drawing.Image imageIn)
         {
